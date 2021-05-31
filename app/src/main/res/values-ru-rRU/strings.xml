@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Доставщик</string>
+
+    <string name="txt_login">Логин</string>
+    <string name="txt_pwd">Пароль</string>
+    <string name="txt_log_in">Войти</string>
+
+    <string name="empty_title" />
+
+    <string name="text_number">№: %s</string>
+    <string name="text_date">от: %s</string>
+    <string name="text_address">Адрес</string>
+    <string name="text_good">Товар</string>
+    <string name="text_amount">Количество</string>
+
+    <string name="title_dialog_error">Ошибка</string>
+    <string name="title_orders">Заказы</string>
+    <string name="title_order">Заказ: %s</string>
+    <string name="text_price">Цена</string>
+    <string name="text_sum">Сумма</string>
+    <string name="text_confirm">Подтвердить</string>
+    <string name="text_open_order">Открыть заказ</string>
+    <string name="text_contact_person">Контактное лицо</string>
+    <string name="text_phone">Телефон</string>
+    <string name="text_refuse_order">Отказ</string>
+</resources>

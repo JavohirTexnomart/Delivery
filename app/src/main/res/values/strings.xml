@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Delivery Texnomart</string>
+
+    <string name="txt_login">Login</string>
+    <string name="txt_pwd">Password</string>
+    <string name="txt_log_in">Log in</string>
+
+    <string name="empty_title" />
+
+    <string name="text_number">№: %s</string>
+    <string name="text_date">: %s</string>
+    <string name="text_address">Address</string>
+    <string name="text_good">Product</string>
+    <string name="text_amount">Amount</string>
+
+    <string name="title_dialog_error">Error</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_order">Order: %s </string>
+    <string name="text_refuse_order">Refuse</string>
+    <string name="text_price">Price</string>
+    <string name="text_sum">Sum</string>
+    <string name="text_confirm">Confirm</string>
+    <string name="text_open_order">Open order</string>
+    <string name="text_contact_person">Contact person</string>
+    <string name="text_phone">Phone</string>
+
+</resources>

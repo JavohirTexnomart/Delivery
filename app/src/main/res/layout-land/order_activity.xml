@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ScrollViewCount,UselessParent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_default"
+        android:paddingBottom="@dimen/padding_bottom">
+
+
+        <TextView
+            android:id="@+id/txt_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/text_number"
+            android:textSize="@dimen/default_text_size_h3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/text_date"
+            android:textSize="@dimen/default_text_size_h2"
+            app:layout_constraintStart_toStartOf="@+id/txt_number"
+            app:layout_constraintTop_toBottomOf="@+id/txt_number" />
+
+        <TextView
+            android:id="@+id/txt_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/text_address"
+            android:textSize="@dimen/default_text_size_h2"
+            app:layout_constraintStart_toStartOf="@+id/txt_date"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_start"
+            app:layout_constraintTop_toBottomOf="@+id/txt_address"
+            app:layout_goneMarginTop="@dimen/margin_top"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <Button
+            android:id="@+id/btn_refuse_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/text_refuse_order"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_goods" />
+
+        <Button
+            android:id="@+id/btn_change_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/text_confirm"
+            app:layout_constraintStart_toEndOf="@+id/btn_refuse_order"
+            app:layout_constraintTop_toBottomOf="@+id/rv_goods" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
