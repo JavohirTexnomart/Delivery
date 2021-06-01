@@ -22,9 +22,9 @@ class OrderActivity : BaseActivity(
     displayLogoToolbar = false
 ) {
 
-    lateinit var cur_order: Order
-    lateinit var goods: MutableList<Good>
-    lateinit var binding: OrderActivityBinding
+    private lateinit var cur_order: Order
+    private lateinit var goods: MutableList<Good>
+    private lateinit var binding: OrderActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,14 +42,16 @@ class OrderActivity : BaseActivity(
         setActionBar(binding.includeToolbar.myToolbar)
     }
 
-    fun bind() {
+    private fun bind() {
         binding.apply {
-            includeItem?.txtNumber?.text = cur_order.number
-            includeItem?.txtDate?.text = cur_order.date
-            includeItem?.txtContactPerson?.text = cur_order.contactPerson
-            includeItem?.txtPhone?.text = cur_order.phoneNumber
-            includeItem?.txtAddress?.text = cur_order.address
-            includeItem?.imgOpenOrder?.isVisible = false
+            includeItem.apply {
+                txtNumber.text = cur_order.number
+                txtDate.text = cur_order.date
+                txtContactPerson.text = cur_order.contactPerson
+                txtPhone.text = cur_order.phoneNumber
+                txtAddress.text = cur_order.address
+                imgOpenOrder.isVisible = false
+            }
             rvGoods.layoutManager = LinearLayoutManager(this@OrderActivity)
             rvGoods.adapter = GoodAdapter(goods)
         }
