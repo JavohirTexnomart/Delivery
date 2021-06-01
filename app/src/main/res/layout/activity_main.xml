@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -25,8 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_start"
             android:autofillHints="@string/txt_pwd"
+            android:backgroundTint="@color/white"
             android:hint="@string/txt_pwd"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            tools:targetApi="lollipop" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
