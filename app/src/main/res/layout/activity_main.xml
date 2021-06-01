@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar" />
+
     <EditText
         android:id="@+id/etxt_email"
         android:layout_width="match_parent"

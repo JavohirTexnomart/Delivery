@@ -16,7 +16,11 @@ import mrj.example.deliverytexnomart.model.Order
  * Created by JavohirAI
  */
 
-class OrderActivity : BaseActivity(titleId = R.string.title_order, homeDislpayEnabled = true) {
+class OrderActivity : BaseActivity(
+    titleId = R.string.title_order,
+    homeDislpayEnabled = true,
+    displayLogoToolbar = false
+) {
 
     lateinit var cur_order: Order
     lateinit var goods: MutableList<Good>
@@ -35,7 +39,7 @@ class OrderActivity : BaseActivity(titleId = R.string.title_order, homeDislpayEn
             cur_order = intent.getParcelableExtra(C.ORDER_KEY)!!
             bind()
         }
-
+        setActionBar(binding.includeToolbar.myToolbar)
     }
 
     fun bind() {

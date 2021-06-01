@@ -12,7 +12,7 @@ import mrj.example.deliverytexnomart.model.Order
  * Created by JavohirAI
  */
 
-class OrdersActivity : BaseActivity(titleId = R.string.title_orders, homeDislpayEnabled = true) {
+class OrdersActivity : BaseActivity(homeDislpayEnabled = true) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +33,7 @@ class OrdersActivity : BaseActivity(titleId = R.string.title_orders, homeDislpay
         binding.apply {
             rvOrders.layoutManager = LinearLayoutManager(this@OrdersActivity)
             rvOrders.adapter = OrderAdapter(order_list = order_list)
+            setActionBar(includeToolbar.myToolbar)
         }
     }
 

@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.viewbinding.ViewBinding
 import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.Order
 
@@ -18,8 +19,9 @@ import mrj.example.deliverytexnomart.model.Order
 
 open class BaseActivity(
     val homeDislpayEnabled: Boolean = false,
-    val titleId: Int = R.string.app_name,
+    val titleId: Int = R.string.empty_title,
     val menuResId: Int = 110,
+    val displayLogoToolbar: Boolean = true,
     val myCallBack: () -> Unit = {}
 ) :
     AppCompatActivity() {
@@ -29,19 +31,8 @@ open class BaseActivity(
     var errorid = 1001
     var connection_id = 1002
 
-    @SuppressLint("StringFormatInvalid")
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if ((supportActionBar != null)) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(homeDislpayEnabled)
-        }
-        title = resources.getString(titleId)
-        if (intent.extras != null) {
-            val cur_order = intent.getParcelableExtra(C.ORDER_KEY) ?: Order("1", "1", "1", "1", "1", "1")
-            if (!cur_order.number.equals("1") && !cur_order.address.equals("1"))
-                title = resources.getString(titleId, cur_order.number)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -80,5 +71,22 @@ open class BaseActivity(
     override fun onPrepareDialog(id: Int, dialog: Dialog?) {
         txt_error.text = dialog_error_message
         super.onPrepareDialog(id, dialog)
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    fun setActionBar(toolbar: Toolbar) {
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(homeDislpayEnabled)
+            it.setDisplayUseLogoEnabled(displayLogoToolbar)
+        }
+        title = resources.getString(titleId)
+        if (intent.extras != null) {
+            val cur_order =
+                intent.getParcelableExtra(C.ORDER_KEY) ?: Order("1", "1", "1", "1", "1", "1")
+            if (!cur_order.number.equals("1") && !cur_order.address.equals("1"))
+                title = resources.getString(titleId, cur_order.number)
+        }
     }
 }
