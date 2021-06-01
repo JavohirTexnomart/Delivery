@@ -25,4 +25,12 @@
     <string name="text_phone">Телефон</string>
     <string name="text_refuse_order">Отказ</string>
     <string name="text_open_shift">Открыть смену</string>
+
+    <array name="order_status">
+        <item>Все</item>
+        <item>В пути</item>
+        <item>Доставлено</item>
+    </array>
+    <string name="text_orders_size">Заказов:%s</string>
+
 </resources>

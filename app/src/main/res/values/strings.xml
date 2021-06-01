@@ -24,5 +24,12 @@
     <string name="text_contact_person">Contact person</string>
     <string name="text_phone">Phone</string>
     <string name="text_open_shift">Open shift</string>
+    <string name="text_orders_size">Orders: %s</string>
+
+    <array name="order_status">
+        <item>All</item>
+        <item>In transit</item>
+        <item>Delivered</item>
+    </array>
 
 </resources>

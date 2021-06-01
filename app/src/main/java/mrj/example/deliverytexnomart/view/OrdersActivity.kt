@@ -34,7 +34,9 @@ class OrdersActivity : BaseActivity(homeDislpayEnabled = true) {
             rvOrders.layoutManager = LinearLayoutManager(this@OrdersActivity)
             rvOrders.adapter = OrderAdapter(order_list = order_list)
             setActionBar(includeToolbar.myToolbar)
+
         }
+
     }
 
 }

@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.viewbinding.ViewBinding
 import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.Order
 
@@ -36,7 +35,7 @@ open class BaseActivity(
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (menuResId.equals(110)) {
+        if (menuResId == 110) {
             return super.onCreateOptionsMenu(menu)
         }
         menuInflater.inflate(menuResId, menu)
@@ -44,7 +43,7 @@ open class BaseActivity(
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId.equals(android.R.id.home)) {
+        if (item.itemId == android.R.id.home) {
             finish()
         }
         return super.onOptionsItemSelected(item)
@@ -53,7 +52,7 @@ open class BaseActivity(
     override fun onCreateDialog(id: Int): Dialog {
         val view = layoutInflater.inflate(android.R.layout.simple_list_item_1, null)
         txt_error = view.findViewById(android.R.id.text1)
-        if (id.equals(errorid)) {
+        if (id == errorid) {
             return AlertDialog.Builder(this)
                 .setTitle(resources.getString(R.string.title_dialog_error))
                 .setView(view)
@@ -70,7 +69,6 @@ open class BaseActivity(
 
     override fun onPrepareDialog(id: Int, dialog: Dialog?) {
         txt_error.text = dialog_error_message
-        super.onPrepareDialog(id, dialog)
     }
 
     @SuppressLint("StringFormatInvalid")

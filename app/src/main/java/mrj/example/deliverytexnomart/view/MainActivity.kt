@@ -16,6 +16,6 @@ class MainActivity : BaseActivity() {
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(this, ShiftActivity::class.java))
         }
-        setActionBar(binding.includeToolbar.myToolbar)
+        setActionBar(toolbar = binding.includeToolbar.myToolbar)
     }
 }
