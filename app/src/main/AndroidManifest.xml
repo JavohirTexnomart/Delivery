@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.OrdersActivity" />
+        <activity android:name=".view.ShiftActivity" />
         <activity android:name=".view.OrderActivity" />
     </application>
 

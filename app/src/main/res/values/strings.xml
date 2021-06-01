@@ -23,5 +23,6 @@
     <string name="text_open_order">Open order</string>
     <string name="text_contact_person">Contact person</string>
     <string name="text_phone">Phone</string>
+    <string name="text_open_shift">Open shift</string>
 
 </resources>

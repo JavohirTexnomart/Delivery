@@ -24,4 +24,5 @@
     <string name="text_contact_person">Контактное лицо</string>
     <string name="text_phone">Телефон</string>
     <string name="text_refuse_order">Отказ</string>
+    <string name="text_open_shift">Открыть смену</string>
 </resources>
