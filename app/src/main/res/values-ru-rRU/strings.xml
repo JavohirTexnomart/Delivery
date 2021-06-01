@@ -31,6 +31,8 @@
         <item>В пути</item>
         <item>Доставлено</item>
     </array>
-    <string name="text_orders_size">Заказов:%s</string>
+    <string name="text_orders_size">Заказов: %s</string>
+    <string name="text_transfer_order">Перенести заказы</string>
+    <string name="text_close_shift">Закрыть смену</string>
 
 </resources>

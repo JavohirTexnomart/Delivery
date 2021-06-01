@@ -1,6 +1,7 @@
 package mrj.example.deliverytexnomart.view
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
@@ -12,7 +13,7 @@ import mrj.example.deliverytexnomart.model.Order
  * Created by JavohirAI
  */
 
-class OrdersActivity : BaseActivity(homeDislpayEnabled = true) {
+class OrdersActivity : BaseActivity(homeDislpayEnabled = true, menuResId = R.menu.orders_menu) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +35,8 @@ class OrdersActivity : BaseActivity(homeDislpayEnabled = true) {
             rvOrders.layoutManager = LinearLayoutManager(this@OrdersActivity)
             rvOrders.adapter = OrderAdapter(order_list = order_list)
             setActionBar(includeToolbar.myToolbar)
-
+            constraintOrderStatus.findViewById<TextView>(R.id.txt_orders).text =
+                resources.getString(R.string.text_orders_size, order_list.size.toString())
         }
 
     }

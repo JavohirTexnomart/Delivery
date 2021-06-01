@@ -15,6 +15,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
         binding.btnLogin.setOnClickListener {
             startActivity(Intent(this, ShiftActivity::class.java))
+            finish()
         }
         setActionBar(toolbar = binding.includeToolbar.myToolbar)
     }

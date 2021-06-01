@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/transfer_order"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/text_transfer_order"
+        app:showAsAction="never" />
+    <item
+        android:orderInCategory="101"
+        android:id="@+id/close_shift"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/text_close_shift"
+        app:showAsAction="never" />
+</menu>

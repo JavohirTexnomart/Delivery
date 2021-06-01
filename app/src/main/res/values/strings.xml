@@ -25,6 +25,8 @@
     <string name="text_phone">Phone</string>
     <string name="text_open_shift">Open shift</string>
     <string name="text_orders_size">Orders: %s</string>
+    <string name="text_transfer_order">Transfer order</string>
+    <string name="text_close_shift">Close shift</string>
 
     <array name="order_status">
         <item>All</item>
