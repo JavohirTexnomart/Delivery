@@ -19,7 +19,7 @@ class OrdersActivity : BaseActivity(homeDislpayEnabled = true, menuResId = R.men
         super.onCreate(savedInstanceState)
         val binding = OrdersActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val order_list = mutableListOf<Order>()
+        val orders = mutableListOf<Order>()
         val order = Order(
             number = "TM-044-3235",
             date = "22.04.2021",
@@ -29,14 +29,14 @@ class OrdersActivity : BaseActivity(homeDislpayEnabled = true, menuResId = R.men
             phoneNumberInFormat = "998901156969"
         )
         for (i in 0..6) {
-            order_list.add(order)
+            orders.add(order)
         }
         binding.apply {
             rvOrders.layoutManager = LinearLayoutManager(this@OrdersActivity)
-            rvOrders.adapter = OrderAdapter(order_list = order_list)
+            rvOrders.adapter = OrderAdapter(order_list = orders)
             setActionBar(includeToolbar.myToolbar)
             constraintOrderStatus.findViewById<TextView>(R.id.txt_orders).text =
-                resources.getString(R.string.text_orders_size, order_list.size.toString())
+                resources.getString(R.string.text_orders_size, orders.size.toString())
         }
 
     }
