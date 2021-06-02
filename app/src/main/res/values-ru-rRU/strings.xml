@@ -34,5 +34,8 @@
     <string name="text_orders_size">Заказов: %s</string>
     <string name="text_transfer_order">Перенести заказы</string>
     <string name="text_close_shift">Закрыть смену</string>
+    <string name="error_field_empty">Поле не заполнено</string>
+    <string name="error_user_not_found">Пользователь не найден!</string>
+    <string name="error_field_incorrect">Поле заполнены некорректно</string>
 
 </resources>

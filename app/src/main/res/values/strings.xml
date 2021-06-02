@@ -6,6 +6,9 @@
     <string name="txt_log_in">Log in</string>
 
     <string name="empty_title" />
+    <string name="title_dialog_error">Error</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_order">Order: %s </string>
 
     <string name="text_number">№: %s</string>
     <string name="text_date">: %s</string>
@@ -13,9 +16,6 @@
     <string name="text_good">Product</string>
     <string name="text_amount">Amount</string>
 
-    <string name="title_dialog_error">Error</string>
-    <string name="title_orders">Orders</string>
-    <string name="title_order">Order: %s </string>
     <string name="text_refuse_order">Refuse</string>
     <string name="text_price">Price</string>
     <string name="text_sum">Sum</string>
@@ -27,6 +27,10 @@
     <string name="text_orders_size">Orders: %s</string>
     <string name="text_transfer_order">Transfer order</string>
     <string name="text_close_shift">Close shift</string>
+
+    <string name="error_field_empty">Field empty</string>
+    <string name="error_user_not_found">User not found</string>
+    <string name="error_field_incorrect">Field is incorrect</string>
 
     <array name="order_status">
         <item>All</item>

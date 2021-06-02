@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import mrj.example.deliverytexnomart.model.C
@@ -25,8 +26,6 @@ open class BaseActivity(
 ) :
     AppCompatActivity() {
 
-    open var dialog_error_message = ""
-    lateinit var txt_error: TextView
     var errorid = 1001
     var connection_id = 1002
 
@@ -49,26 +48,15 @@ open class BaseActivity(
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCreateDialog(id: Int): Dialog {
-        val view = layoutInflater.inflate(android.R.layout.simple_list_item_1, null)
-        txt_error = view.findViewById(android.R.id.text1)
-        if (id == errorid) {
-            return AlertDialog.Builder(this)
-                .setTitle(resources.getString(R.string.title_dialog_error))
-                .setView(view)
-                .setNegativeButton(android.R.string.ok, null)
-                .create()
-        }
-        if (id.equals(connection_id)) {
-            return AlertDialog.Builder(this)
-                .setView(view)
-                .create()
-        }
-        return super.onCreateDialog(id)
+    fun toast(text: String,toast_length:Int=Toast.LENGTH_SHORT) {
+        Toast.makeText(this, text, toast_length).show()
     }
 
-    override fun onPrepareDialog(id: Int, dialog: Dialog?) {
-        txt_error.text = dialog_error_message
+    fun showCustomDialog(title: String) {
+        AlertDialog.Builder(this)
+            .setTitle(title)
+            .setNegativeButton(android.R.string.ok, null)
+            .create().show()
     }
 
     @SuppressLint("StringFormatInvalid")

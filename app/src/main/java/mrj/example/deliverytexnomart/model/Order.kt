@@ -8,8 +8,35 @@ import android.os.Parcelable
  * Created by JavohirAI
  */
 
-data class Order(var number: String?, var date: String?, var address: String?,var contactPerson:String?, var phoneNumber:String?, var phoneNumberInFormat:String?):Parcelable {
+class Order() : Parcelable {
+    var number = ""
+    var date = ""
+    var address = ""
+    var contactPerson = ""
+    var phoneNumber = ""
+    var phoneNumberInFormat = ""
+    var order_id = ""
+
+    constructor(
+        number: String?,
+        date: String?,
+        address: String?,
+        contactPerson: String?,
+        phoneNumber: String?,
+        phoneNumberInFormat: String?,
+        order_id: String?
+    ) : this() {
+        this.number = number!!
+        this.date = date!!
+        this.address = address!!
+        this.contactPerson = contactPerson!!
+        this.phoneNumber = phoneNumber!!
+        this.phoneNumberInFormat = phoneNumberInFormat!!
+        this.order_id = order_id!!
+    }
+
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -26,6 +53,7 @@ data class Order(var number: String?, var date: String?, var address: String?,va
         parcel.writeString(contactPerson)
         parcel.writeString(phoneNumber)
         parcel.writeString(phoneNumberInFormat)
+        parcel.writeString(order_id)
     }
 
     override fun describeContents(): Int {
@@ -41,6 +69,18 @@ data class Order(var number: String?, var date: String?, var address: String?,va
             return arrayOfNulls(size)
         }
     }
+}
 
+class OrdersResponse() {
+    var message = ""
+    var message_code = ""
+    var result = mutableListOf<Order>()
 
+    constructor(message: String?, message_code: String?, result: List<Order>?) : this() {
+        this.message = message!!
+        this.message_code = message_code!!
+        if (result != null) {
+            this.result.addAll(result)
+        }
+    }
 }

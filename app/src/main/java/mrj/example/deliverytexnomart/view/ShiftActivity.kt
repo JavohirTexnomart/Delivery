@@ -5,7 +5,7 @@ import android.os.Bundle
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.databinding.ShiftActivityBinding
 
-class ShiftActivity : BaseActivity(homeDislpayEnabled = true) {
+class ShiftActivity : BaseActivity() {
 
     lateinit var binding: ShiftActivityBinding
 

@@ -13,7 +13,7 @@ import mrj.example.deliverytexnomart.model.Order
  * Created by JavohirAI
  */
 
-class OrdersActivity : BaseActivity(homeDislpayEnabled = true, menuResId = R.menu.orders_menu) {
+class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
