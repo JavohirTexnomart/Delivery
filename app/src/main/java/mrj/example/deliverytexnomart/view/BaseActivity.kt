@@ -70,7 +70,7 @@ open class BaseActivity(
         title = resources.getString(titleId)
         if (intent.extras != null) {
             val cur_order =
-                intent.getParcelableExtra(C.ORDER_KEY) ?: Order("1", "1", "1", "1", "1", "1")
+                intent.getParcelableExtra(C.ORDER_KEY) ?: Order()
             if (!cur_order.number.equals("1") && !cur_order.address.equals("1"))
                 title = resources.getString(titleId, cur_order.number)
         }
