@@ -3,6 +3,7 @@
 
     <integer name="error_user_not_found">102</integer>
     <integer name="error_field_incorrect">101</integer>
+    <integer name="error_client_not_found">103</integer>
     <integer name="success">200</integer>
 
 </resources>

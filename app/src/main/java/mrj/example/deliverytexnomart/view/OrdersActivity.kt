@@ -3,18 +3,15 @@ package mrj.example.deliverytexnomart.view
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.OrderAdapter
 import mrj.example.deliverytexnomart.common.OrdersCommon
-import mrj.example.deliverytexnomart.common.UserCommon
 import mrj.example.deliverytexnomart.databinding.OrdersActivityBinding
 import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.Order
 import mrj.example.deliverytexnomart.model.OrdersResponse
-import mrj.example.deliverytexnomart.model.UserResonse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +31,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         binding = OrdersActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         adapter = OrdersResponse()
-        orders = mutableListOf<Order>()
+        orders = mutableListOf()
 
         OrdersCommon.retrofitService.getOrders(C.current_user.code_client)
             .enqueue(object : Callback<OrdersResponse> {
@@ -58,10 +55,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
                                 orders.addAll(adapter.result)
                                 bindingFull()
                             }
-                            resources.getInteger(R.integer.error_user_not_found) -> showCustomDialog(
-                                resources.getString(R.string.error_user_not_found)
-                            )
-                            resources.getInteger(R.integer.error_field_incorrect) -> showCustomDialog(
+                            resources.getInteger(R.integer.error_client_not_found) -> showCustomDialog(
                                 resources.getString(R.string.error_user_not_found)
                             )
                         }
@@ -77,7 +71,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
 
     }
 
-    private fun OrdersActivity.bindingFull() {
+    private fun bindingFull() {
         binding.apply {
             rvOrders.adapter = OrderAdapter(order_list = orders)
             rvOrders.adapter!!.notifyDataSetChanged()

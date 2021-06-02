@@ -37,5 +37,6 @@
     <string name="error_field_empty">Поле не заполнено</string>
     <string name="error_user_not_found">Пользователь не найден!</string>
     <string name="error_field_incorrect">Поле заполнены некорректно</string>
+    <string name="error_client_not_found">Пользователь не найден!</string>
 
 </resources>

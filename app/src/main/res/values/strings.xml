@@ -31,6 +31,7 @@
     <string name="error_field_empty">Field empty</string>
     <string name="error_user_not_found">User not found</string>
     <string name="error_field_incorrect">Field is incorrect</string>
+    <string name="error_client_not_found">Client not found</string>
 
     <array name="order_status">
         <item>All</item>
