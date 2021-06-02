@@ -6,9 +6,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface OrdersService {
-    @GET("javoxir_ut_texnomart/hs/deliverymobapp/getorders")
-    fun getOrders(
-        @Query("code_client") code_client: String?
-    ): Call<OrdersResponse>
+interface OrderService {
+    @GET("javoxir_ut_texnomart/hs/deliverymobapp/orderdetails")
+    fun getGoods(
+        @Query("date") date: String?, @Query("number") number: String?
+    ): Call<GoodsResponse>
 }

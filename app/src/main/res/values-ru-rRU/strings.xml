@@ -38,5 +38,9 @@
     <string name="error_user_not_found">Пользователь не найден!</string>
     <string name="error_field_incorrect">Поле заполнены некорректно</string>
     <string name="error_client_not_found">Пользователь не найден!</string>
+    <string name="error_date_number_of_order_not_fill">Дата или номер заказа не заполнены</string>
+    <string name="error_date_format_invalid">Формат даты некорректный</string>
+    <string name="text_total_title">Итого</string>
+    <string name="text_total_sum_order">Всего к оплате:</string>
 
 </resources>

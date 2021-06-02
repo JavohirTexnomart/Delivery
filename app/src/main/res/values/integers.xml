@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <integer name="error_user_not_found">102</integer>
     <integer name="error_field_incorrect">101</integer>
+    <integer name="error_user_not_found">102</integer>
     <integer name="error_client_not_found">103</integer>
+    <integer name="error_date_number_of_order_not_fill">104</integer>
+    <integer name="error_date_format_invalid">105</integer>
     <integer name="success">200</integer>
 
 </resources>

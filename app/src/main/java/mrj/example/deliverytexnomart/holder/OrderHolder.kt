@@ -23,8 +23,6 @@ import mrj.example.deliverytexnomart.view.OrderActivity
 class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
     RecyclerView.ViewHolder(itemViewbinding.root) {
 
-    private val REQUEST_PHONE_CALL = 1
-
     fun bind(order: Order) {
         val resources = itemViewbinding.root.resources
         itemViewbinding.apply {
@@ -49,7 +47,7 @@ class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
                 val context = itemViewbinding.root.context
                 val intent = Intent(Intent.ACTION_DIAL)
                 intent.data = Uri.parse("tel:${order.phoneNumber}")
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ContextCompat.checkSelfPermission(
                             context,
                             Manifest.permission.CALL_PHONE
@@ -58,7 +56,7 @@ class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
                         ActivityCompat.requestPermissions(
                             context as Activity,
                             arrayOf(Manifest.permission.CALL_PHONE),
-                            REQUEST_PHONE_CALL
+                            C.REQUEST_PHONE_CALL
                         );
                     } else {
                         context.startActivity(intent);
