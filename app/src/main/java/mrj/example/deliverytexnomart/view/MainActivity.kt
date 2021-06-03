@@ -28,7 +28,6 @@ class MainActivity : BaseActivity() {
 
 
         binding.btnLogin.setOnClickListener {
-            enbaleLogin(false)
             val login = binding.etxtEmail.text.toString()
             val password = binding.etxtPwd.text.toString()
 
@@ -39,6 +38,7 @@ class MainActivity : BaseActivity() {
             ) {
                 return@setOnClickListener
             }
+            enbaleLogin(false)
 
             adapter = UserResonse()
             UserCommon.retrofitService.getUser(login, password)
