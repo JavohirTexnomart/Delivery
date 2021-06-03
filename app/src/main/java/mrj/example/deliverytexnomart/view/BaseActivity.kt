@@ -46,7 +46,7 @@ open class BaseActivity(
         return super.onOptionsItemSelected(item)
     }
 
-    fun toast(text: String,toast_length:Int=Toast.LENGTH_SHORT) {
+    fun toast(text: String, toast_length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, text, toast_length).show()
     }
 

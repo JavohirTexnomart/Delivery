@@ -42,5 +42,7 @@
     <string name="error_date_format_invalid">Формат даты некорректный</string>
     <string name="text_total_title">Итого</string>
     <string name="text_total_sum_order">Всего к оплате:</string>
+    <string name="text_car">Номер автомобиля</string>
+    <string name="text_login_as_admin">Войти как админ</string>
 
 </resources>

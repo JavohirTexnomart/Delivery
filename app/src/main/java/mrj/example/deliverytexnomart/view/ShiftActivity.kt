@@ -25,6 +25,7 @@ class ShiftActivity : BaseActivity() {
         binding = ShiftActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnOpenShift.setOnClickListener {
+            enbaleLogin(false)
             mRocket = findViewById(R.id.rocket)
             val valueAnimator = ValueAnimator.ofFloat(0f, -mScreenHeight)
             valueAnimator.addUpdateListener { animation ->
@@ -54,5 +55,9 @@ class ShiftActivity : BaseActivity() {
         val displaymetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displaymetrics)
         mScreenHeight = displaymetrics.heightPixels.toFloat()
+    }
+
+    private fun enbaleLogin(enable: Boolean) {
+        binding.btnOpenShift.isEnabled = enable
     }
 }

@@ -1,9 +1,12 @@
 package mrj.example.deliverytexnomart.view
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.UserCommon
@@ -26,16 +29,15 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
         setActionBar(toolbar = binding.includeToolbar.myToolbar)
 
+        binding.imgOpenShowdialog.setOnClickListener {
+            showDialogConfirmAdmin()
+        }
 
         binding.btnLogin.setOnClickListener {
-            val login = binding.etxtEmail.text.toString()
+            val login = binding.etxtText.text.toString()
             val password = binding.etxtPwd.text.toString()
 
-            if (checkFieldIsEmpty(login, binding.etxtEmail) || checkFieldIsEmpty(
-                    password,
-                    binding.etxtPwd
-                )
-            ) {
+            if (checkFields()) {
                 return@setOnClickListener
             }
             enbaleLogin(false)
@@ -57,30 +59,34 @@ class MainActivity : BaseActivity() {
                         call: Call<UserResonse>,
                         response: Response<UserResonse>
                     ) {
-                        if (response.body() != null) {
-                            adapter = (response.body() as UserResonse)
-                            when (adapter.message_code.toInt()) {
-                                resources.getInteger(R.integer.success) -> {
-                                    val user = adapter.result
-                                    openShiftOrOrdersAndRegisterUserInC(user)
-                                }
-                                resources.getInteger(R.integer.error_user_not_found) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_user_not_found)
-                                    )
-                                    enbaleLogin(true)
-                                }
-                                resources.getInteger(R.integer.error_field_incorrect) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_user_not_found)
-                                    )
-                                    enbaleLogin(true)
-                                }
-                            }
-
-                        }
+                        processResponseBody(response)
                     }
                 })
+        }
+    }
+
+    private fun processResponseBody(response: Response<UserResonse>) {
+        if (response.body() != null) {
+            adapter = (response.body() as UserResonse)
+            when (adapter.message_code.toInt()) {
+                resources.getInteger(R.integer.success) -> {
+                    val user = adapter.result
+                    openShiftOrOrdersAndRegisterUserInC(user)
+                }
+                resources.getInteger(R.integer.error_user_not_found) -> {
+                    showCustomDialog(
+                        resources.getString(R.string.error_user_not_found)
+                    )
+                    enbaleLogin(true)
+                }
+                resources.getInteger(R.integer.error_field_incorrect) -> {
+                    showCustomDialog(
+                        resources.getString(R.string.error_user_not_found)
+                    )
+                    enbaleLogin(true)
+                }
+            }
+
         }
     }
 
@@ -100,5 +106,25 @@ class MainActivity : BaseActivity() {
     private fun enbaleLogin(enable: Boolean) {
         binding.btnLogin.isEnabled = enable
     }
+
+    private fun showDialogConfirmAdmin() {
+        val customView = layoutInflater.inflate(R.layout.login_layout, null)
+        AlertDialog.Builder(this)
+            .setView(customView)
+            .setTitle(resources.getString(R.string.text_login_as_admin))
+            .setPositiveButton(
+                android.R.string.ok
+            ) { dialog, which ->
+
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .create().show()
+    }
+
+    private fun checkFields(): Boolean =
+        checkFieldIsEmpty(binding.etxtText.text.toString(), binding.etxtText) || checkFieldIsEmpty(
+            binding.etxtPwd.text.toString(),
+            binding.etxtPwd
+        )
 
 }
