@@ -16,7 +16,6 @@ import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.GoodAdapter
 import mrj.example.deliverytexnomart.common.GoodCommon
-import mrj.example.deliverytexnomart.common.OrdersCommon
 import mrj.example.deliverytexnomart.databinding.OrderActivityBinding
 import mrj.example.deliverytexnomart.model.*
 import retrofit2.Call
@@ -34,7 +33,7 @@ class OrderActivity : BaseActivity(
     displayLogoToolbar = false
 ) {
     lateinit var adapter: GoodsResponse
-    private lateinit var cur_order: Order
+    private lateinit var order: Order
     private lateinit var goods: MutableList<Good>
     private lateinit var binding: OrderActivityBinding
 
@@ -44,10 +43,10 @@ class OrderActivity : BaseActivity(
         setContentView(binding.root)
         goods = mutableListOf()
         if (intent.extras != null) {
-            cur_order = intent.getParcelableExtra(C.ORDER_KEY)!!
+            order = intent.getParcelableExtra(C.ORDER_KEY)!!
             bind()
         }
-        GoodCommon.retrofitService.getGoods(cur_order.date, cur_order.number)
+        GoodCommon.retrofitService.getGoods(order.date, order.number)
             .enqueue(object : Callback<GoodsResponse> {
                 override fun onFailure(call: Call<GoodsResponse>, t: Throwable) {
                     Toast.makeText(
@@ -86,16 +85,16 @@ class OrderActivity : BaseActivity(
     private fun bind() {
         binding.apply {
             includeItem.apply {
-                txtNumber.text = cur_order.number
-                txtDate.text = cur_order.date
-                txtContactPerson.text = cur_order.contactPerson
-                txtPhone.text = cur_order.phoneNumber
-                txtAddress.text = cur_order.address
+                txtNumber.text = order.number
+                txtDate.text = order.date
+                txtContactPerson.text = order.contactPerson
+                txtPhone.text = order.phoneNumber
+                txtAddress.text = order.address
                 imgOpenOrder.isVisible = false
                 imgCallClient.setOnClickListener {
                     val context = binding.root.context
                     val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse("tel:${cur_order.phoneNumber}")
+                    intent.data = Uri.parse("tel:${order.phoneNumber}")
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (ContextCompat.checkSelfPermission(
                                 context,
@@ -106,12 +105,12 @@ class OrderActivity : BaseActivity(
                                 context as Activity,
                                 arrayOf(Manifest.permission.CALL_PHONE),
                                 C.REQUEST_PHONE_CALL
-                            );
+                            )
                         } else {
-                            context.startActivity(intent);
+                            context.startActivity(intent)
                         }
                     } else {
-                        context.startActivity(intent);
+                        context.startActivity(intent)
                     }
                 }
             }
