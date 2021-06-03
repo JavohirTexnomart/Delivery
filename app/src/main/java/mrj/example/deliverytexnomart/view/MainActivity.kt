@@ -28,6 +28,7 @@ class MainActivity : BaseActivity() {
 
 
         binding.btnLogin.setOnClickListener {
+            enbaleLogin(false)
             val login = binding.etxtEmail.text.toString()
             val password = binding.etxtPwd.text.toString()
 
@@ -49,6 +50,7 @@ class MainActivity : BaseActivity() {
                             Toast.LENGTH_SHORT
                         )
                             .show()
+                        enbaleLogin(true)
                     }
 
                     override fun onResponse(
@@ -62,12 +64,18 @@ class MainActivity : BaseActivity() {
                                     val user = adapter.result
                                     openShiftOrOrdersAndRegisterUserInC(user)
                                 }
-                                resources.getInteger(R.integer.error_user_not_found) -> showCustomDialog(
-                                    resources.getString(R.string.error_user_not_found)
-                                )
-                                resources.getInteger(R.integer.error_field_incorrect) -> showCustomDialog(
-                                    resources.getString(R.string.error_user_not_found)
-                                )
+                                resources.getInteger(R.integer.error_user_not_found) -> {
+                                    showCustomDialog(
+                                        resources.getString(R.string.error_user_not_found)
+                                    )
+                                    enbaleLogin(true)
+                                }
+                                resources.getInteger(R.integer.error_field_incorrect) -> {
+                                    showCustomDialog(
+                                        resources.getString(R.string.error_user_not_found)
+                                    )
+                                    enbaleLogin(true)
+                                }
                             }
 
                         }
@@ -88,4 +96,9 @@ class MainActivity : BaseActivity() {
         startActivity(Intent(this, ShiftActivity::class.java))
         finish()
     }
+
+    private fun enbaleLogin(enable: Boolean) {
+        binding.btnLogin.isEnabled = enable
+    }
+
 }
