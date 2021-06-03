@@ -43,7 +43,7 @@ class OrderActivity : BaseActivity(
         setContentView(binding.root)
         goods = mutableListOf()
         if (intent.extras != null) {
-            order = intent.getParcelableExtra(C.ORDER_KEY)!!
+            order = intent.getParcelableExtra(ConstantsFile.ORDER_KEY)!!
             bind()
         }
         GoodCommon.retrofitService.getGoods(order.date, order.number)
@@ -104,7 +104,7 @@ class OrderActivity : BaseActivity(
                             ActivityCompat.requestPermissions(
                                 context as Activity,
                                 arrayOf(Manifest.permission.CALL_PHONE),
-                                C.REQUEST_PHONE_CALL
+                                ConstantsFile.REQUEST_PHONE_CALL
                             )
                         } else {
                             context.startActivity(intent)

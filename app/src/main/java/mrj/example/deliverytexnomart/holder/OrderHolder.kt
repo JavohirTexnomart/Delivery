@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.databinding.OrderItemActivityBinding
-import mrj.example.deliverytexnomart.model.C
+import mrj.example.deliverytexnomart.model.ConstantsFile
 import mrj.example.deliverytexnomart.model.Order
 import mrj.example.deliverytexnomart.view.OrderActivity
 
@@ -38,7 +38,7 @@ class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
                 setOnClickListener {
                     val context = this.context
                     val intent = Intent(context, OrderActivity::class.java)
-                    intent.putExtra(C.ORDER_KEY, order)
+                    intent.putExtra(ConstantsFile.ORDER_KEY, order)
                     context.startActivity(intent)
                 }
             }
@@ -56,7 +56,7 @@ class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
                         ActivityCompat.requestPermissions(
                             context as Activity,
                             arrayOf(Manifest.permission.CALL_PHONE),
-                            C.REQUEST_PHONE_CALL
+                            ConstantsFile.REQUEST_PHONE_CALL
                         );
                     } else {
                         context.startActivity(intent);
