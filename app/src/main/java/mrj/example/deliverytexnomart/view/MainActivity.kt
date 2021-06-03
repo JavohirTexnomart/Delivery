@@ -81,7 +81,7 @@ class MainActivity : BaseActivity() {
                     val user = userAdapter.result
                     openShiftOrOrdersAndRegisterUserInC(user)
                 } else {
-                    val cars = adminUserAdapter.result
+                    C.cars.addAll(adminUserAdapter.result)
                     openForSelectCar()
                 }
             }
@@ -114,7 +114,9 @@ class MainActivity : BaseActivity() {
     }
 
     fun openForSelectCar() {
-        toast("get cars")
+        if (C.cars.size > 0) {
+            startActivity(Intent(this, CarSelectActivity::class.java))
+        }
     }
 
     private fun enbaleLogin(enable: Boolean) {
