@@ -10,7 +10,6 @@
 .DS_Store
 /build
 /captures
-app/src/main/java/mrj/example/deliverytexnomart/model/C.kt
 .externalNativeBuild
 .cxx
 local.properties
