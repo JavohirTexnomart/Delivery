@@ -1,19 +1,19 @@
 package mrj.example.deliverytexnomart.view
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
+import mrj.example.deliverytexnomart.common.AdminUserCommon
 import mrj.example.deliverytexnomart.common.UserCommon
 import mrj.example.deliverytexnomart.databinding.MainActivityBinding
+import mrj.example.deliverytexnomart.model.AdminUserResponse
 import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.User
-import mrj.example.deliverytexnomart.model.UserResonse
+import mrj.example.deliverytexnomart.model.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +21,8 @@ import retrofit2.Response
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: MainActivityBinding
-    lateinit var adapter: UserResonse
+    lateinit var userAdapter: UserResponse
+    lateinit var adminUserAdapter: AdminUserResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +43,10 @@ class MainActivity : BaseActivity() {
             }
             enbaleLogin(false)
 
-            adapter = UserResonse()
+            userAdapter = UserResponse()
             UserCommon.retrofitService.getUser(login, password)
-                .enqueue(object : Callback<UserResonse> {
-                    override fun onFailure(call: Call<UserResonse>, t: Throwable) {
+                .enqueue(object : Callback<UserResponse> {
+                    override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                         Toast.makeText(
                             this@MainActivity,
                             "On failure ${t.message}",
@@ -56,8 +57,8 @@ class MainActivity : BaseActivity() {
                     }
 
                     override fun onResponse(
-                        call: Call<UserResonse>,
-                        response: Response<UserResonse>
+                        call: Call<UserResponse>,
+                        response: Response<UserResponse>
                     ) {
                         processResponseBody(response)
                     }
@@ -65,28 +66,37 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun processResponseBody(response: Response<UserResonse>) {
+    private fun processResponseBody(response: Response<UserResponse>) {
         if (response.body() != null) {
-            adapter = (response.body() as UserResonse)
-            when (adapter.message_code.toInt()) {
-                resources.getInteger(R.integer.success) -> {
-                    val user = adapter.result
+            userAdapter = (response.body() as UserResponse)
+            checkResultOfBody(userAdapter.message_code.toInt(), true)
+
+        }
+    }
+
+    private fun checkResultOfBody(messageCode: Int, isUserAccount: Boolean) {
+        when (messageCode) {
+            resources.getInteger(R.integer.success) -> {
+                if (isUserAccount) {
+                    val user = userAdapter.result
                     openShiftOrOrdersAndRegisterUserInC(user)
-                }
-                resources.getInteger(R.integer.error_user_not_found) -> {
-                    showCustomDialog(
-                        resources.getString(R.string.error_user_not_found)
-                    )
-                    enbaleLogin(true)
-                }
-                resources.getInteger(R.integer.error_field_incorrect) -> {
-                    showCustomDialog(
-                        resources.getString(R.string.error_user_not_found)
-                    )
-                    enbaleLogin(true)
+                } else {
+                    val cars = adminUserAdapter.result
+                    openForSelectCar()
                 }
             }
-
+            resources.getInteger(R.integer.error_user_not_found) -> {
+                showCustomDialog(
+                    resources.getString(R.string.error_user_not_found)
+                )
+                enbaleLogin(true)
+            }
+            resources.getInteger(R.integer.error_field_incorrect) -> {
+                showCustomDialog(
+                    resources.getString(R.string.error_user_not_found)
+                )
+                enbaleLogin(true)
+            }
         }
     }
 
@@ -103,22 +113,53 @@ class MainActivity : BaseActivity() {
         finish()
     }
 
+    fun openForSelectCar() {
+        toast("get cars")
+    }
+
     private fun enbaleLogin(enable: Boolean) {
         binding.btnLogin.isEnabled = enable
     }
 
     private fun showDialogConfirmAdmin() {
         val customView = layoutInflater.inflate(R.layout.login_layout, null)
+        val etxtLogin = customView.findViewById<EditText>(R.id.etxt_text)
+        val etxtPwd = customView.findViewById<EditText>(R.id.etxt_pwd)
         AlertDialog.Builder(this)
             .setView(customView)
             .setTitle(resources.getString(R.string.text_login_as_admin))
             .setPositiveButton(
                 android.R.string.ok
             ) { dialog, which ->
-
+                checkAdminUserProfile(etxtLogin.text.toString(), etxtPwd.text.toString())
             }
             .setNegativeButton(android.R.string.cancel, null)
             .create().show()
+    }
+
+    private fun checkAdminUserProfile(login: String, password: String) {
+        AdminUserCommon.retrofitService.getCars(login, password)
+            .enqueue(object : Callback<AdminUserResponse> {
+                override fun onFailure(call: Call<AdminUserResponse>, t: Throwable) {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "On failure ${t.message}",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    enbaleLogin(true)
+                }
+
+                override fun onResponse(
+                    call: Call<AdminUserResponse>,
+                    response: Response<AdminUserResponse>
+                ) {
+                    if (response.body() != null) {
+                        adminUserAdapter = (response.body() as AdminUserResponse)
+                        checkResultOfBody(adminUserAdapter.message_code.toInt(), false)
+                    }
+                }
+            })
     }
 
     private fun checkFields(): Boolean =

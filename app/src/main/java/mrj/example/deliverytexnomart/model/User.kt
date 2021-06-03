@@ -12,7 +12,7 @@ class User() {
     var code_client = ""
 }
 
-class UserResonse() {
+class UserResponse() {
     var message = ""
     var message_code = ""
     var result = User()
