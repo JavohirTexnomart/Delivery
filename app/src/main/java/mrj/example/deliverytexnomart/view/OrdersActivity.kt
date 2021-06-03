@@ -9,7 +9,7 @@ import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.OrderAdapter
 import mrj.example.deliverytexnomart.common.OrdersCommon
 import mrj.example.deliverytexnomart.databinding.OrdersActivityBinding
-import mrj.example.deliverytexnomart.model.ConstantsFile
+import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.Order
 import mrj.example.deliverytexnomart.model.OrdersResponse
 import retrofit2.Call
@@ -33,7 +33,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         adapter = OrdersResponse()
         orders = mutableListOf()
 
-        OrdersCommon.retrofitService.getOrders(ConstantsFile.current_user.code_client)
+        OrdersCommon.retrofitService.getOrders(C.current_user.code_client)
             .enqueue(object : Callback<OrdersResponse> {
                 override fun onFailure(call: Call<OrdersResponse>, t: Throwable) {
                     Toast.makeText(

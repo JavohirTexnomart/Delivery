@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import mrj.example.deliverytexnomart.model.ConstantsFile
+import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.Order
 
 /**
@@ -68,7 +68,7 @@ open class BaseActivity(
         title = resources.getString(titleId)
         if (intent.extras != null) {
             val cur_order =
-                intent.getParcelableExtra(ConstantsFile.ORDER_KEY) ?: Order()
+                intent.getParcelableExtra(C.ORDER_KEY) ?: Order()
             if (!cur_order.number.equals("1") && !cur_order.address.equals("1"))
                 title = resources.getString(titleId, cur_order.number)
         }

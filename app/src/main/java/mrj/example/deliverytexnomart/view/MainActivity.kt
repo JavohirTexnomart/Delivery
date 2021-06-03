@@ -8,7 +8,7 @@ import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.UserCommon
 import mrj.example.deliverytexnomart.databinding.MainActivityBinding
-import mrj.example.deliverytexnomart.model.ConstantsFile
+import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.User
 import mrj.example.deliverytexnomart.model.UserResonse
 import retrofit2.Call
@@ -92,7 +92,7 @@ class MainActivity : BaseActivity() {
     }
 
     fun openShiftOrOrdersAndRegisterUserInC(user: User) {
-        ConstantsFile.current_user = user
+        C.current_user = user
         startActivity(Intent(this, ShiftActivity::class.java))
         finish()
     }
