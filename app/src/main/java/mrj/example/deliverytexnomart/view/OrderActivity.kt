@@ -2,6 +2,7 @@ package mrj.example.deliverytexnomart.view
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -92,26 +93,10 @@ class OrderActivity : BaseActivity(
                 txtAddress.text = order.address
                 imgOpenOrder.isVisible = false
                 imgCallClient.setOnClickListener {
-                    val context = binding.root.context
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    intent.data = Uri.parse("tel:${order.phoneNumber}")
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ContextCompat.checkSelfPermission(
-                                context,
-                                Manifest.permission.CALL_PHONE
-                            ) != PackageManager.PERMISSION_GRANTED
-                        ) {
-                            ActivityCompat.requestPermissions(
-                                context as Activity,
-                                arrayOf(Manifest.permission.CALL_PHONE),
-                                C.REQUEST_PHONE_CALL
-                            )
-                        } else {
-                            context.startActivity(intent)
-                        }
-                    } else {
-                        context.startActivity(intent)
-                    }
+                    openCallDial(binding.root.context, order.phoneNumber)
+                }
+                btnConfirmOrder.setOnClickListener {
+                    startActivity(Intent(this@OrderActivity, VerificationActivity::class.java))
                 }
             }
             rvGoods.layoutManager = LinearLayoutManager(this@OrderActivity)
@@ -123,12 +108,36 @@ class OrderActivity : BaseActivity(
     private fun enableButtons() {
         binding.rvGoods.adapter!!.notifyDataSetChanged()
         binding.apply {
-            btnChangeProducts.isEnabled = goods.size > 0
+            btnConfirmOrder.isEnabled = goods.size > 0
             btnRefuseOrder.isEnabled = goods.size > 0
             txtTotal.text = goods.sumByDouble {
                 it.sum
             }.toString()
         }
 
+    }
+
+    companion object {
+        fun openCallDial(context: Context, phoneNumber: String) {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${phoneNumber}")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.CALL_PHONE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    ActivityCompat.requestPermissions(
+                        context as Activity,
+                        arrayOf(Manifest.permission.CALL_PHONE),
+                        C.REQUEST_PHONE_CALL
+                    )
+                } else {
+                    context.startActivity(intent)
+                }
+            } else {
+                context.startActivity(intent)
+            }
+        }
     }
 }

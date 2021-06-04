@@ -45,5 +45,6 @@
     <string name="text_car">Номер автомобиля</string>
     <string name="text_login_as_admin">Войти как админ</string>
     <string name="txt_continue">Продолжить</string>
+    <string name="text_verification_code">····</string>
 
 </resources>

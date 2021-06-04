@@ -31,6 +31,7 @@
         <activity android:name=".view.CarSelectActivity" />
         <activity android:name=".view.ShiftActivity" />
         <activity android:name=".view.OrderActivity" />
+        <activity android:name=".view.VerificationActivity" />
     </application>
 
 </manifest>

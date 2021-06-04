@@ -44,26 +44,7 @@ class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
             }
 
             imgCallClient.setOnClickListener {
-                val context = itemViewbinding.root.context
-                val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:${order.phoneNumber}")
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.CALL_PHONE
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        ActivityCompat.requestPermissions(
-                            context as Activity,
-                            arrayOf(Manifest.permission.CALL_PHONE),
-                            C.REQUEST_PHONE_CALL
-                        );
-                    } else {
-                        context.startActivity(intent);
-                    }
-                } else {
-                    context.startActivity(intent);
-                }
+                OrderActivity.openCallDial(itemViewbinding.root.context, order.phoneNumber)
             }
         }
     }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_start"
+        android:layout_weight="1">
+
+        <com.jkb.vcedittext.VerificationCodeEditText
+            android:id="@+id/etxt_verification_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_top_start"
+            android:layout_marginTop="@dimen/margin_verification_etxt_top"
+            android:layout_marginEnd="@dimen/margin_top_start"
+            android:autofillHints="@string/text_verification_code"
+            android:hint="@string/text_verification_code"
+            android:inputType="numberPassword"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:bottomLineHeight="2dp"
+            app:bottomLineNormalColor="@color/shape_yellow"
+            app:bottomLineSelectedColor="@color/shape_yellow"
+            app:figures="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selectedBackgroundColor="@color/white"
+            app:verCodeMargin="10dp"
+            tools:targetApi="lollipop" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -13,4 +13,6 @@
     <dimen name="margin_top_start">16dp</dimen>
     <dimen name="margin_good_item">8dp</dimen>
     <dimen name="padding_default">8dp</dimen>
+
+    <dimen name="margin_verification_etxt_top">30dp</dimen>
 </resources>
