@@ -33,7 +33,10 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         adapter = OrdersResponse()
         orders = mutableListOf()
 
-        OrdersCommon.retrofitService.getOrders(C.current_user.code_client)
+        OrdersCommon.retrofitService.getOrders(
+            C.current_user.code_client,
+            C.getNameSelectedCar(this)
+        )
             .enqueue(object : Callback<OrdersResponse> {
                 override fun onFailure(call: Call<OrdersResponse>, t: Throwable) {
                     Toast.makeText(

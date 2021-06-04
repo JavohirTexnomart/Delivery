@@ -14,7 +14,8 @@ class Order() : Parcelable {
     var address = ""
     var contactPerson = ""
     var phoneNumber = ""
-    var phoneNumberInFormat = ""
+    var numberRouteSheet = ""
+    var dateRouteSheet = ""
 
     constructor(
         number: String?,
@@ -22,17 +23,20 @@ class Order() : Parcelable {
         address: String?,
         contactPerson: String?,
         phoneNumber: String?,
-        phoneNumberInFormat: String?
+        numberRouteSheet: String?,
+        dateRouteSheet: String?
     ) : this() {
         this.number = number!!
         this.date = date!!
         this.address = address!!
         this.contactPerson = contactPerson!!
         this.phoneNumber = phoneNumber!!
-        this.phoneNumberInFormat = phoneNumberInFormat!!
+        this.numberRouteSheet = numberRouteSheet!!
+        this.dateRouteSheet = dateRouteSheet!!
     }
 
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -48,7 +52,8 @@ class Order() : Parcelable {
         parcel.writeString(address)
         parcel.writeString(contactPerson)
         parcel.writeString(phoneNumber)
-        parcel.writeString(phoneNumberInFormat)
+        parcel.writeString(numberRouteSheet)
+        parcel.writeString(dateRouteSheet)
     }
 
     override fun describeContents(): Int {
