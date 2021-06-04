@@ -81,6 +81,8 @@
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginEnd="@dimen/margin_end"
         android:text="@string/txt_log_in" />
 
 </LinearLayout>

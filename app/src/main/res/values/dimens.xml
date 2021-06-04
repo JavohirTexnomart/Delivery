@@ -14,5 +14,8 @@
     <dimen name="margin_good_item">8dp</dimen>
     <dimen name="padding_default">8dp</dimen>
 
+    <dimen name="margin_clock_txt_top">58dp</dimen>
+    <dimen name="margin_clock_top">60dp</dimen>
+
     <dimen name="margin_verification_etxt_top">30dp</dimen>
 </resources>

@@ -46,5 +46,8 @@
     <string name="text_login_as_admin">Войти как админ</string>
     <string name="txt_continue">Продолжить</string>
     <string name="text_verification_code">····</string>
+    <string name="text_clock">Часы</string>
+    <string name="text_example_clock">2:45</string>
+    <string name="text_send_againg"><u>Отправить ещё раз</u></string>
 
 </resources>

@@ -39,5 +39,50 @@
             app:verCodeMargin="10dp"
             tools:targetApi="lollipop" />
 
+        <ImageView
+            android:id="@+id/img_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_clock_top"
+            android:contentDescription="@string/text_clock"
+            android:src="@drawable/ic_clock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.38"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etxt_verification_code" />
+
+        <TextView
+            android:id="@+id/txt_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_top_start"
+            android:layout_marginTop="@dimen/margin_clock_txt_top"
+            android:text="@string/text_example_clock"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/img_clock"
+            app:layout_constraintTop_toBottomOf="@+id/etxt_verification_code" />
+
+        <TextView
+            android:id="@+id/txt_sendAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:text="@string/text_send_againg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_clock" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_confirm_verification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginEnd="@dimen/margin_end"
+        android:layout_marginBottom="@dimen/margin_end"
+        android:text="@string/text_confirm" />
 </LinearLayout>

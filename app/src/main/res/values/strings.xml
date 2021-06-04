@@ -40,6 +40,9 @@
     <string name="text_car">Car number</string>
     <string name="text_login_as_admin">Log in as admin</string>
     <string name="txt_continue">Continue</string>
+    <string name="text_clock">Clock</string>
+    <string name="text_example_clock">2:45</string>
+    <string name="text_send_againg"><u>Send againg</u></string>
 
     <array name="order_status">
         <item>All</item>
