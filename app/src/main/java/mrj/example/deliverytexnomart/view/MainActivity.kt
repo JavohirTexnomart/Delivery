@@ -170,4 +170,11 @@ class MainActivity : BaseActivity() {
             binding.etxtPwd
         )
 
+    override fun onResume() {
+        super.onResume()
+        val carName = C.get_selected_car(this).name
+        if (carName != "10000111") {
+            binding.txtCar.text = carName
+        }
+    }
 }

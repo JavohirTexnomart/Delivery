@@ -31,7 +31,7 @@ class CarSelectActivity : BaseActivity(homeDislpayEnabled = true) {
                         .toString()
                 }
                 if (cur_car != null) {
-                    C.selected_car = cur_car
+                    C.set_selected_car(this@CarSelectActivity, cur_car)
                     finish()
                 }
             }
