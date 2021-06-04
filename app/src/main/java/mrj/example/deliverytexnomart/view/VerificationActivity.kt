@@ -2,6 +2,7 @@ package mrj.example.deliverytexnomart.view
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
@@ -23,8 +24,7 @@ class VerificationActivity : BaseActivity(homeDislpayEnabled = true) {
         binding.btnConfirmVerification.setOnClickListener {
             sendLetter = true
             enableConfirmButton()
-            val handler = Handler()
-            handler.postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 sendLetter = false
                 enableConfirmButton()
             }, 2000)
