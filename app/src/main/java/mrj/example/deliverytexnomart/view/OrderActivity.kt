@@ -140,4 +140,12 @@ class OrderActivity : BaseActivity(
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(C.order_closed)
+        {
+            finish()
+        }
+    }
 }

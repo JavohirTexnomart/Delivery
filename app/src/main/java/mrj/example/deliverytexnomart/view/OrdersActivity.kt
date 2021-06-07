@@ -33,6 +33,13 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         adapter = OrdersResponse()
         orders = mutableListOf()
 
+        showOrders()
+        bindingFull()
+
+    }
+
+    private fun showOrders() {
+        orders.clear()
         OrdersCommon.retrofitService.getOrders(
             C.current_user.code_client,
             C.getNameSelectedCar(this)
@@ -70,8 +77,6 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
             setActionBar(includeToolbar.myToolbar)
             rvOrders.layoutManager = LinearLayoutManager(this@OrdersActivity)
         }
-        bindingFull()
-
     }
 
     private fun bindingFull() {
@@ -83,4 +88,11 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (C.order_closed) {
+            showOrders()
+            C.order_closed = !C.order_closed
+        }
+    }
 }
