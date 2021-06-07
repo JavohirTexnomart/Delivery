@@ -2,12 +2,15 @@ package mrj.example.deliverytexnomart.view
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -100,6 +103,9 @@ class OrderActivity : BaseActivity(
                     intent.putExtra(C.ORDER_KEY_FOR_CONFIRM, order)
                     startActivity(intent)
                 }
+                btnRefuseOrder.setOnClickListener {
+                    showDialogRefuseOrder()
+                }
             }
             rvGoods.layoutManager = LinearLayoutManager(this@OrderActivity)
             rvGoods.adapter = GoodAdapter(goods)
@@ -145,9 +151,27 @@ class OrderActivity : BaseActivity(
 
     override fun onResume() {
         super.onResume()
-        if(C.order_closed)
-        {
+        if (C.order_closed) {
             finish()
         }
+    }
+
+    private fun showDialogRefuseOrder() {
+        val items = arrayOf("123", "all")
+        val view = layoutInflater.inflate(R.layout.refuse_order_dialog, null)
+        val lv_products = view.findViewById<ListView>(R.id.lv_products)
+        lv_products.adapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, items)
+        AlertDialog.Builder(this).setTitle("Вы действительно хотите отменить заказ")
+            .setView(view)
+            .setTitle(resources.getString(R.string.title_refuse))
+            .setPositiveButton(
+                android.R.string.ok
+            ) { dialog, which ->
+                lv_products.checkedItemIds.forEach {
+                    toast("Result $it")
+                }
+            }
+            .create().show()
     }
 }

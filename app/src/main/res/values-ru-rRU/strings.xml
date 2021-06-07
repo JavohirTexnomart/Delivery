@@ -53,5 +53,7 @@
     <string name="error_message_incorrect">СМС код не правильно введено</string>
     <string name="error_route_sheet_not_found">Маршрутный лист не найден. Обратитесь к администратору!</string>
     <string name="error_can_not_close_route_sheet">Маршрутный лист не записан. Обратитесь к администратору!</string>
+    <string name="text_are_you_sure_you_want_to_cancel_your_order">Вы действительно хотите отменить заказ?</string>
+    <string name="title_refuse">Отмена заказа</string>
 
 </resources>
