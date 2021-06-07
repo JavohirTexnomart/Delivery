@@ -15,7 +15,6 @@
     <string name="text_address">Address</string>
     <string name="text_good">Product</string>
     <string name="text_amount">Amount</string>
-
     <string name="text_refuse_order">Refuse</string>
     <string name="text_price">Price</string>
     <string name="text_sum">Sum</string>
@@ -27,13 +26,6 @@
     <string name="text_orders_size">Orders: %s</string>
     <string name="text_transfer_order">Transfer order</string>
     <string name="text_close_shift">Close shift</string>
-
-    <string name="error_field_empty">Field empty</string>
-    <string name="error_user_not_found">User not found</string>
-    <string name="error_field_incorrect">Field is incorrect</string>
-    <string name="error_client_not_found">Client not found</string>
-    <string name="error_date_number_of_order_not_fill">Date or number not filled</string>
-    <string name="error_date_format_invalid">Date format invalid</string>
     <string name="text_total_title">Total:</string>
     <string name="text_verification_code">····</string>
     <string name="text_total_sum_order">Total sum:</string>
@@ -43,6 +35,17 @@
     <string name="text_clock">Clock</string>
     <string name="text_example_clock">2:45</string>
     <string name="text_send_againg"><u>Send againg</u></string>
+
+    <string name="error_field_empty">Field empty</string>
+    <string name="error_user_not_found">User not found</string>
+    <string name="error_field_incorrect">Field is incorrect</string>
+    <string name="error_client_not_found">Client not found</string>
+    <string name="error_date_number_of_order_not_fill">Date or number not filled</string>
+    <string name="error_date_format_invalid">Date format invalid</string>
+    <string name="error_order_not_found">Order not found</string>
+    <string name="error_message_incorrect">Message incorrect</string>
+    <string name="error_route_sheet_not_found">Route sheet not found</string>
+    <string name="error_can_not_close_route_sheet">Can not close rout sheet</string>
 
     <array name="order_status">
         <item>All</item>

@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface ConfirmMessageService {
     @GET("javoxir_ut_texnomart/hs/deliverymobapp/confirmletter")
-    fun getGoods(
+    fun getResponse(
         @Query("date") date: String?, @Query("number") number: String?,
         @Query("dateRouteSheet") dateRouteSheet: String?, @Query("numberRouteSheet") numberRouteSheet: String?,
-    @Query("date") numberletter: String?
+    @Query("numberletter") numberletter: String?
     ): Call<ConfirmMessage>
 }

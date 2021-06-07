@@ -49,5 +49,9 @@
     <string name="text_clock">Часы</string>
     <string name="text_example_clock">2:45</string>
     <string name="text_send_againg"><u>Отправить ещё раз</u></string>
+    <string name="error_order_not_found">Заказ не найден. Обратитесь к администратору!</string>
+    <string name="error_message_incorrect">СМС код не правильно введено</string>
+    <string name="error_route_sheet_not_found">Маршрутный лист не найден. Обратитесь к администратору!</string>
+    <string name="error_can_not_close_route_sheet">Маршрутный лист не записан. Обратитесь к администратору!</string>
 
 </resources>

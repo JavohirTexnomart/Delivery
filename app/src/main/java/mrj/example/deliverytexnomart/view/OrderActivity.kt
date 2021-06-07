@@ -96,7 +96,9 @@ class OrderActivity : BaseActivity(
                     openCallDial(binding.root.context, order.phoneNumber)
                 }
                 btnConfirmOrder.setOnClickListener {
-                    startActivity(Intent(this@OrderActivity, VerificationActivity::class.java))
+                    val intent = Intent(this@OrderActivity, VerificationActivity::class.java)
+                    intent.putExtra(C.ORDER_KEY_FOR_CONFIRM, order)
+                    startActivity(intent)
                 }
             }
             rvGoods.layoutManager = LinearLayoutManager(this@OrderActivity)
