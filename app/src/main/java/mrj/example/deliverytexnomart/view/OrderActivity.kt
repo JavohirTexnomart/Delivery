@@ -1,14 +1,11 @@
 package mrj.example.deliverytexnomart.view
 
 import android.Manifest
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
+import android.app.*
+import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
+import android.os.*
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,9 +17,7 @@ import mrj.example.deliverytexnomart.adapter.GoodAdapter
 import mrj.example.deliverytexnomart.common.GoodCommon
 import mrj.example.deliverytexnomart.databinding.OrderActivityBinding
 import mrj.example.deliverytexnomart.model.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 import java.util.*
 
 
@@ -30,6 +25,7 @@ import java.util.*
  * Created by JavohirAI
  */
 
+@Suppress("DEPRECATION")
 class OrderActivity : BaseActivity(
     titleId = R.string.title_order,
     homeDislpayEnabled = true,
@@ -166,20 +162,21 @@ class OrderActivity : BaseActivity(
         AlertDialog.Builder(this)
             .setMultiChoiceItems(
                 colors.toTypedArray(), checkedColors
-            ) { dialog, which, isChecked ->
+            ) { _, which, isChecked ->
                 checkedColors[which] = isChecked
             }
             .setCancelable(false)
             .setTitle(resources.getString(R.string.text_are_you_sure_you_want_to_cancel_your_order))
-            .setPositiveButton(android.R.string.yes) { dialog, which ->
+            .setPositiveButton(android.R.string.yes) { _, _ ->
                 for (i in checkedColors.indices) {
                     val checked = checkedColors[i]
                     if (checked) {
                         toast(colors[i])
                     }
+
                 }
             }
-            .setNegativeButton(android.R.string.no) { dialog, which ->
+            .setNegativeButton(android.R.string.no) { dialog, _ ->
                 dialog.cancel()
             }
             .create()
