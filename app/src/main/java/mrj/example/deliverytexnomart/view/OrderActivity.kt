@@ -9,8 +9,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,6 +23,7 @@ import mrj.example.deliverytexnomart.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 /**
@@ -157,21 +156,34 @@ class OrderActivity : BaseActivity(
     }
 
     private fun showDialogRefuseOrder() {
-        val items = arrayOf("123", "all")
-        val view = layoutInflater.inflate(R.layout.refuse_order_dialog, null)
-        val lv_products = view.findViewById<ListView>(R.id.lv_products)
-        lv_products.adapter =
-            ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, items)
-        AlertDialog.Builder(this).setTitle("Вы действительно хотите отменить заказ")
-            .setView(view)
-            .setTitle(resources.getString(R.string.title_refuse))
-            .setPositiveButton(
-                android.R.string.ok
-            ) { dialog, which ->
-                lv_products.checkedItemIds.forEach {
-                    toast("Result $it")
+
+        val colors = mutableListOf(resources.getString(R.string.text_all))
+        goods.forEach {
+            colors.add(it.name)
+        }
+
+        val checkedColors = BooleanArray(colors.size)
+        AlertDialog.Builder(this)
+            .setMultiChoiceItems(
+                colors.toTypedArray(), checkedColors
+            ) { dialog, which, isChecked ->
+                checkedColors[which] = isChecked
+            }
+            .setCancelable(false)
+            .setTitle(resources.getString(R.string.text_are_you_sure_you_want_to_cancel_your_order))
+            .setPositiveButton(android.R.string.yes) { dialog, which ->
+                for (i in checkedColors.indices) {
+                    val checked = checkedColors[i]
+                    if (checked) {
+                        toast(colors[i])
+                    }
                 }
             }
-            .create().show()
+            .setNegativeButton(android.R.string.no) { dialog, which ->
+                dialog.cancel()
+            }
+            .create()
+            .show()
+
     }
 }

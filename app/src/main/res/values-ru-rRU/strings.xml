@@ -56,4 +56,5 @@
     <string name="text_are_you_sure_you_want_to_cancel_your_order">Вы действительно хотите отменить заказ?</string>
     <string name="title_refuse">Отмена заказа</string>
 
+    <string name="text_all">ВСЕ</string>
 </resources>

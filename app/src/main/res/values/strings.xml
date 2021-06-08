@@ -47,7 +47,9 @@
     <string name="error_message_incorrect">Message incorrect</string>
     <string name="error_route_sheet_not_found">Route sheet not found</string>
     <string name="error_can_not_close_route_sheet">Can not close rout sheet</string>
+
     <string name="text_are_you_sure_you_want_to_cancel_your_order">Are you sure you want to cancel your order?</string>
+    <string name="text_all">ALL</string>
 
     <array name="order_status">
         <item>All</item>
