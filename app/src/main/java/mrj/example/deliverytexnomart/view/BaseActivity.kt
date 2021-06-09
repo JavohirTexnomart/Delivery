@@ -72,6 +72,24 @@ open class BaseActivity(
             resources.getInteger(R.integer.error_date_format_invalid) -> showCustomDialog(
                 resources.getString(R.string.error_user_not_found)
             )
+            resources.getInteger(R.integer.error_order_not_found) -> showCustomDialog(
+                resources.getString(R.string.error_order_not_found)
+            )
+            resources.getInteger(R.integer.error_message_incorrect) -> showCustomDialog(
+                resources.getString(R.string.error_message_incorrect)
+            )
+            resources.getInteger(R.integer.error_route_sheet_not_found) -> showCustomDialog(
+                resources.getString(R.string.error_route_sheet_not_found)
+            )
+            resources.getInteger(R.integer.error_can_not_close_route_sheet) -> showCustomDialog(
+                resources.getString(R.string.error_can_not_close_route_sheet)
+            )
+            resources.getInteger(R.integer.error_can_not_found_realization) -> showCustomDialog(
+                resources.getString(R.string.error_can_not_found_realization)
+            )
+            resources.getInteger(R.integer.error_can_not_create_route_sheet) -> showCustomDialog(
+                resources.getString(R.string.error_can_not_create_route_sheet)
+            )
         }
     }
 

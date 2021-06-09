@@ -6,7 +6,6 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
-import android.widget.Toast
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.ConfirmMessageCommon
@@ -68,67 +67,23 @@ class VerificationActivity : BaseActivity(homeDislpayEnabled = true) {
                     numberletter = confirmMessage
                 ).enqueue(object : Callback<ConfirmMessage> {
                     override fun onFailure(call: Call<ConfirmMessage>, t: Throwable) {
-                        Toast.makeText(
-                            this@VerificationActivity,
-                            "On failure ${t.message}",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        toast("On failure ${t.message}")
                     }
-
                     override fun onResponse(
                         call: Call<ConfirmMessage>,
                         response: Response<ConfirmMessage>
                     ) {
                         if (response.body() != null) {
                             adapter = (response.body() as ConfirmMessage)
-                            when (adapter.message_code.toInt()) {
-                                resources.getInteger(R.integer.success) -> {
-                                    C.order_closed = true
-                                    finish()
-                                }
-                                resources.getInteger(R.integer.error_date_number_of_order_not_fill) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_date_number_of_order_not_fill)
-                                    )
-                                    sendLetter = false
-                                    enableConfirmButton(!sendLetter)
-                                }
-                                resources.getInteger(R.integer.error_date_format_invalid) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_date_format_invalid)
-                                    )
-                                    sendLetter = false
-                                    enableConfirmButton(!sendLetter)
-                                }
-                                resources.getInteger(R.integer.error_order_not_found) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_order_not_found)
-                                    )
-                                    sendLetter = false
-                                    enableConfirmButton(!sendLetter)
-                                }
-                                resources.getInteger(R.integer.error_message_incorrect) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_message_incorrect)
-                                    )
-                                    sendLetter = false
-                                    enableConfirmButton(!sendLetter)
-                                }
-                                resources.getInteger(R.integer.error_route_sheet_not_found) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_route_sheet_not_found)
-                                    )
-                                    sendLetter = false
-                                    enableConfirmButton(!sendLetter)
-                                }
-                                resources.getInteger(R.integer.error_can_not_close_route_sheet) -> {
-                                    showCustomDialog(
-                                        resources.getString(R.string.error_can_not_close_route_sheet)
-                                    )
-                                    sendLetter = false
-                                    enableConfirmButton(!sendLetter)
-                                }
+                            val messageCode = adapter.message_code.toInt()
+                            val callBack = {
+                                C.order_closed = true
+                                finish()
+                            }
+                            catchExceptionShowDialog(messageCode, callBack)
+                            if (messageCode != 200) {
+                                sendLetter = false
+                                enableConfirmButton(!sendLetter)
                             }
                         }
                     }

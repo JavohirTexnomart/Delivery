@@ -10,6 +10,8 @@
     <integer name="error_message_incorrect">107</integer>
     <integer name="error_route_sheet_not_found">108</integer>
     <integer name="error_can_not_close_route_sheet">109</integer>
+    <integer name="error_can_not_found_realization">110</integer>
+    <integer name="error_can_not_create_route_sheet">111</integer>
     <integer name="success">200</integer>
 
 </resources>
