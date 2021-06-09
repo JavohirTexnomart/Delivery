@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.Toast
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.AdminUserCommon
@@ -47,12 +46,7 @@ class MainActivity : BaseActivity() {
             UserCommon.retrofitService.getUser(login, password)
                 .enqueue(object : Callback<UserResponse> {
                     override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "On failure ${t.message}",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        toast("On failure ${t.message}")
                         enbaleLogin(true)
                     }
 
@@ -70,33 +64,22 @@ class MainActivity : BaseActivity() {
         if (response.body() != null) {
             userAdapter = (response.body() as UserResponse)
             checkResultOfBody(userAdapter.message_code.toInt(), true)
-
         }
     }
 
     private fun checkResultOfBody(messageCode: Int, isUserAccount: Boolean) {
-        when (messageCode) {
-            resources.getInteger(R.integer.success) -> {
-                if (isUserAccount) {
-                    val user = userAdapter.result
-                    openShiftOrOrdersAndRegisterUserInC(user)
-                } else {
-                    C.cars.addAll(adminUserAdapter.result)
-                    openForSelectCar()
-                }
+        val myCallBack = {
+            if (isUserAccount) {
+                val user = userAdapter.result
+                openShiftOrOrdersAndRegisterUserInC(user)
+            } else {
+                C.cars.addAll(adminUserAdapter.result)
+                openForSelectCar()
             }
-            resources.getInteger(R.integer.error_user_not_found) -> {
-                showCustomDialog(
-                    resources.getString(R.string.error_user_not_found)
-                )
-                enbaleLogin(true)
-            }
-            resources.getInteger(R.integer.error_field_incorrect) -> {
-                showCustomDialog(
-                    resources.getString(R.string.error_user_not_found)
-                )
-                enbaleLogin(true)
-            }
+        }
+        catchExceptionShowDialog(messageCode, myCallBack)
+        if (messageCode != 200) {
+            enbaleLogin(true)
         }
     }
 
@@ -143,12 +126,7 @@ class MainActivity : BaseActivity() {
         AdminUserCommon.retrofitService.getCars(login, password)
             .enqueue(object : Callback<AdminUserResponse> {
                 override fun onFailure(call: Call<AdminUserResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "On failure ${t.message}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    toast("On failure ${t.message}")
                     enbaleLogin(true)
                 }
 

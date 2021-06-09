@@ -46,12 +46,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         )
             .enqueue(object : Callback<OrdersResponse> {
                 override fun onFailure(call: Call<OrdersResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@OrdersActivity,
-                        "On failure ${t.message}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    toast("On failure ${t.message}")
                 }
 
                 override fun onResponse(
@@ -60,16 +55,12 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
                 ) {
                     if (response.body() != null) {
                         adapter = (response.body() as OrdersResponse)
-                        when (adapter.message_code.toInt()) {
-                            resources.getInteger(R.integer.success) -> {
-                                orders.addAll(adapter.result)
-                                bindingFull()
-                            }
-                            resources.getInteger(R.integer.error_client_not_found) -> showCustomDialog(
-                                resources.getString(R.string.error_user_not_found)
-                            )
+                        val messageCode = adapter.message_code.toInt()
+                        val callback = {
+                            orders.addAll(adapter.result)
+                            bindingFull()
                         }
-
+                        catchExceptionShowDialog(messageCode, callback)
                     }
                 }
             })

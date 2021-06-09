@@ -6,7 +6,6 @@ import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.*
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -15,6 +14,7 @@ import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.GoodAdapter
 import mrj.example.deliverytexnomart.common.GoodCommon
+import mrj.example.deliverytexnomart.common.RefuseOrderCommon
 import mrj.example.deliverytexnomart.databinding.OrderActivityBinding
 import mrj.example.deliverytexnomart.model.*
 import retrofit2.*
@@ -48,12 +48,7 @@ class OrderActivity : BaseActivity(
         GoodCommon.retrofitService.getGoods(order.date, order.number)
             .enqueue(object : Callback<GoodsResponse> {
                 override fun onFailure(call: Call<GoodsResponse>, t: Throwable) {
-                    Toast.makeText(
-                        this@OrderActivity,
-                        "On failure ${t.message}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    toast("On failure ${t.message}")
                 }
 
                 override fun onResponse(
@@ -62,19 +57,12 @@ class OrderActivity : BaseActivity(
                 ) {
                     if (response.body() != null) {
                         adapter = (response.body() as GoodsResponse)
-                        when (adapter.message_code.toInt()) {
-                            resources.getInteger(R.integer.success) -> {
-                                goods.addAll(adapter.result)
-                                enableButtons()
-                            }
-                            resources.getInteger(R.integer.error_date_number_of_order_not_fill) -> showCustomDialog(
-                                resources.getString(R.string.error_user_not_found)
-                            )
-                            resources.getInteger(R.integer.error_date_format_invalid) -> showCustomDialog(
-                                resources.getString(R.string.error_user_not_found)
-                            )
+                        val messageCode = adapter.message_code.toInt()
+                        val myCallBack = {
+                            goods.addAll(adapter.result)
+                            enableButtons()
                         }
-
+                        catchExceptionShowDialog(messageCode, myCallBack)
                     }
                 }
             })
@@ -153,34 +141,70 @@ class OrderActivity : BaseActivity(
 
     private fun showDialogRefuseOrder() {
 
-        val colors = mutableListOf(resources.getString(R.string.text_all))
+        val goods_of_order = mutableListOf(resources.getString(R.string.text_all))
         goods.forEach {
-            colors.add(it.name)
+            goods_of_order.add(it.name)
         }
 
-        val checkedColors = BooleanArray(colors.size)
+        val checkedGoodsBoolean = BooleanArray(goods_of_order.size)
         AlertDialog.Builder(this)
             .setMultiChoiceItems(
-                colors.toTypedArray(), checkedColors
+                goods_of_order.toTypedArray(), checkedGoodsBoolean
             ) { _, which, isChecked ->
-                checkedColors[which] = isChecked
+                checkedGoodsBoolean[which] = isChecked
             }
             .setCancelable(false)
             .setTitle(resources.getString(R.string.text_are_you_sure_you_want_to_cancel_your_order))
             .setPositiveButton(android.R.string.yes) { _, _ ->
-                for (i in checkedColors.indices) {
-                    val checked = checkedColors[i]
+                var all = false
+                val checkedgoods = mutableListOf<String>()
+                for (i in checkedGoodsBoolean.indices) {
+                    val checked = checkedGoodsBoolean[i]
                     if (checked) {
-                        toast(colors[i])
+                        if (goods_of_order[i] == resources.getString(R.string.text_all)) {
+                            all = true
+                            break
+                        } else {
+                            checkedgoods.add(goods_of_order[i])
+                        }
                     }
-
                 }
+                refuseOrder(all, checkedgoods.toTypedArray())
             }
             .setNegativeButton(android.R.string.no) { dialog, _ ->
                 dialog.cancel()
             }
             .create()
             .show()
-
     }
+
+    private fun refuseOrder(all: Boolean, goods: Array<String>) {
+        val post_data = PostDataRefuseOrder(
+            number = order.number,
+            date = order.date,
+            numberRouteSheet = order.numberRouteSheet,
+            dateRouteSheet = order.dateRouteSheet,
+            all = all,
+            goods = goods
+        )
+
+        RefuseOrderCommon.retrofitService.getResponse(post_data)
+            .enqueue(object : Callback<RefuseOrder> {
+                override fun onResponse(call: Call<RefuseOrder>, response: Response<RefuseOrder>) {
+                    val refuseAdapter: RefuseOrder
+                    if (response.body() != null) {
+                        refuseAdapter = (response.body() as RefuseOrder)
+                        val myCallback = {
+                            enableButtons()
+                        }
+                        catchExceptionShowDialog(refuseAdapter.message_code.toInt(), myCallback)
+                    }
+                }
+
+                override fun onFailure(call: Call<RefuseOrder>, t: Throwable) {
+                    toast("On failure ${t.message}")
+                }
+            })
+    }
+
 }
