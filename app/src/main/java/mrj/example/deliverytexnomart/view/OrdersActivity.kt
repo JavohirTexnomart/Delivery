@@ -2,7 +2,6 @@ package mrj.example.deliverytexnomart.view
 
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
@@ -24,7 +23,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
 
     lateinit var adapter: OrdersResponse
     lateinit var orders: MutableList<Order>
-    lateinit var binding: OrdersActivityBinding
+    private lateinit var binding: OrdersActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

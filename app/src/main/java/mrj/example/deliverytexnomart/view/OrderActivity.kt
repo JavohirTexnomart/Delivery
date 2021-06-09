@@ -96,16 +96,15 @@ class OrderActivity : BaseActivity(
         }
     }
 
-    private fun enableButtons() {
+    private fun enableButtons(enable: Boolean = true) {
         binding.rvGoods.adapter!!.notifyDataSetChanged()
         binding.apply {
-            btnConfirmOrder.isEnabled = goods.size > 0
-            btnRefuseOrder.isEnabled = goods.size > 0
+            btnConfirmOrder.isEnabled = goods.size > 0 && enable
+            btnRefuseOrder.isEnabled = goods.size > 0 && enable
             txtTotal.text = goods.sumByDouble {
                 it.sum
             }.toString()
         }
-
     }
 
     companion object {
@@ -141,31 +140,32 @@ class OrderActivity : BaseActivity(
 
     private fun showDialogRefuseOrder() {
 
-        val goods_of_order = mutableListOf(resources.getString(R.string.text_all))
+        val goodsOfOrder = mutableListOf(resources.getString(R.string.text_all))
         goods.forEach {
-            goods_of_order.add(it.name)
+            goodsOfOrder.add(it.name)
         }
 
-        val checkedGoodsBoolean = BooleanArray(goods_of_order.size)
+        val checkedGoodsBoolean = BooleanArray(goodsOfOrder.size)
         AlertDialog.Builder(this)
             .setMultiChoiceItems(
-                goods_of_order.toTypedArray(), checkedGoodsBoolean
+                goodsOfOrder.toTypedArray(), checkedGoodsBoolean
             ) { _, which, isChecked ->
                 checkedGoodsBoolean[which] = isChecked
             }
             .setCancelable(false)
             .setTitle(resources.getString(R.string.text_are_you_sure_you_want_to_cancel_your_order))
             .setPositiveButton(android.R.string.yes) { _, _ ->
+                enableButtons(false)
                 var all = false
                 val checkedgoods = mutableListOf<String>()
                 for (i in checkedGoodsBoolean.indices) {
                     val checked = checkedGoodsBoolean[i]
                     if (checked) {
-                        if (goods_of_order[i] == resources.getString(R.string.text_all)) {
+                        if (goodsOfOrder[i] == resources.getString(R.string.text_all)) {
                             all = true
                             break
                         } else {
-                            checkedgoods.add(goods_of_order[i])
+                            checkedgoods.add(goodsOfOrder[i])
                         }
                     }
                 }
@@ -179,7 +179,7 @@ class OrderActivity : BaseActivity(
     }
 
     private fun refuseOrder(all: Boolean, goods: Array<String>) {
-        val post_data = PostDataRefuseOrder(
+        val postData = PostDataRefuseOrder(
             number = order.number,
             date = order.date,
             numberRouteSheet = order.numberRouteSheet,
@@ -188,16 +188,21 @@ class OrderActivity : BaseActivity(
             goods = goods
         )
 
-        RefuseOrderCommon.retrofitService.getResponse(post_data)
+        RefuseOrderCommon.retrofitService.getResponse(postData)
             .enqueue(object : Callback<RefuseOrder> {
                 override fun onResponse(call: Call<RefuseOrder>, response: Response<RefuseOrder>) {
                     val refuseAdapter: RefuseOrder
                     if (response.body() != null) {
                         refuseAdapter = (response.body() as RefuseOrder)
+                        val messageCode = refuseAdapter.message_code.toInt()
                         val myCallback = {
+                            finish()
+                            C.order_closed = true
+                        }
+                        catchExceptionShowDialog(messageCode, myCallback)
+                        if (messageCode != 200) {
                             enableButtons()
                         }
-                        catchExceptionShowDialog(refuseAdapter.message_code.toInt(), myCallback)
                     }
                 }
 

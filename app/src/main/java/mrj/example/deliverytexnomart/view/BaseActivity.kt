@@ -19,13 +19,9 @@ open class BaseActivity(
     val homeDislpayEnabled: Boolean = false,
     val titleId: Int = R.string.empty_title,
     val menuResId: Int = 110,
-    val displayLogoToolbar: Boolean = true,
-    val myCallBack: () -> Unit = {}
+    val displayLogoToolbar: Boolean = true
 ) :
     AppCompatActivity() {
-
-    var errorid = 1001
-    var connection_id = 1002
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +60,8 @@ open class BaseActivity(
                 showCustomDialog(
                     resources.getString(R.string.error_user_not_found)
                 )
-            }resources.getInteger(R.integer.error_client_not_found) -> {
+            }
+            resources.getInteger(R.integer.error_client_not_found) -> {
                 showCustomDialog(
                     resources.getString(R.string.error_client_not_found)
                 )
@@ -95,10 +92,10 @@ open class BaseActivity(
         }
         title = resources.getString(titleId)
         if (intent.extras != null) {
-            val cur_order =
+            val curOrder =
                 intent.getParcelableExtra(C.ORDER_KEY) ?: Order()
-            if (!cur_order.number.equals("1") && !cur_order.address.equals("1"))
-                title = resources.getString(titleId, cur_order.number)
+            if (!curOrder.number.equals("1") && !curOrder.address.equals("1"))
+                title = resources.getString(titleId, curOrder.number)
         }
     }
 }
