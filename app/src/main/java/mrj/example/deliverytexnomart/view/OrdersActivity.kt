@@ -1,16 +1,17 @@
 package mrj.example.deliverytexnomart.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.OrderAdapter
 import mrj.example.deliverytexnomart.common.OrdersCommon
+import mrj.example.deliverytexnomart.common.ShiftChangeCommon
 import mrj.example.deliverytexnomart.databinding.OrdersActivityBinding
-import mrj.example.deliverytexnomart.model.C
-import mrj.example.deliverytexnomart.model.Order
-import mrj.example.deliverytexnomart.model.OrdersResponse
+import mrj.example.deliverytexnomart.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,6 +36,41 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         showOrders()
         bindingFull()
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val myCallback = {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+        when (item.itemId) {
+            R.id.item_close_shift -> {
+                changeShiftAndDoCallBack(myCallback)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun changeShiftAndDoCallBack(myCallback: () -> Unit) {
+        val body = PostDataShiftChange(C.current_user.login, C.current_user.password, "close")
+        ShiftChangeCommon.retrofitService.getResponse(body)
+            .enqueue(object : Callback<ResponseResult> {
+                override fun onResponse(
+                    call: Call<ResponseResult>,
+                    response: Response<ResponseResult>
+                ) {
+                    if (response.body() != null) {
+                        val currentAdapter = (response.body() as ResponseResult)
+                        val messageCode = currentAdapter.message_code.toInt()
+                        catchExceptionShowDialog(messageCode, myCallback)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
+                    toast("On failure ${t.message}")
+                }
+
+            })
     }
 
     private fun showOrders() {

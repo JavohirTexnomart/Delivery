@@ -1,6 +1,6 @@
 package mrj.example.deliverytexnomart.model
 
-class RefuseOrder {
+class ResponseResult {
     var message = ""
     var message_code = ""
 }

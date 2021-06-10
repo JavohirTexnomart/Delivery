@@ -11,7 +11,6 @@ import mrj.example.deliverytexnomart.common.UserCommon
 import mrj.example.deliverytexnomart.databinding.MainActivityBinding
 import mrj.example.deliverytexnomart.model.AdminUserResponse
 import mrj.example.deliverytexnomart.model.C
-import mrj.example.deliverytexnomart.model.User
 import mrj.example.deliverytexnomart.model.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -71,7 +70,14 @@ class MainActivity : BaseActivity() {
         val myCallBack = {
             if (isUserAccount) {
                 val user = userAdapter.result
-                openShiftOrOrdersAndRegisterUserInC(user)
+                C.current_user = user
+                if (user.status == "open") {
+                    startActivity(Intent(this, OrdersActivity::class.java))
+                    finish()
+                }else{
+                    startActivity(Intent(this, ShiftActivity::class.java))
+                    finish()
+                }
             } else {
                 C.cars.addAll(adminUserAdapter.result)
                 openForSelectCar()
@@ -90,13 +96,7 @@ class MainActivity : BaseActivity() {
         return text.isEmpty()
     }
 
-    fun openShiftOrOrdersAndRegisterUserInC(user: User) {
-        C.current_user = user
-        startActivity(Intent(this, ShiftActivity::class.java))
-        finish()
-    }
-
-    fun openForSelectCar() {
+    private fun openForSelectCar() {
         if (C.cars.size > 0) {
             startActivity(Intent(this, CarSelectActivity::class.java))
         }

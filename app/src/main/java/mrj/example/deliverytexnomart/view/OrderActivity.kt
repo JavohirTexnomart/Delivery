@@ -189,11 +189,11 @@ class OrderActivity : BaseActivity(
         )
 
         RefuseOrderCommon.retrofitService.getResponse(postData)
-            .enqueue(object : Callback<RefuseOrder> {
-                override fun onResponse(call: Call<RefuseOrder>, response: Response<RefuseOrder>) {
-                    val refuseAdapter: RefuseOrder
+            .enqueue(object : Callback<ResponseResult> {
+                override fun onResponse(call: Call<ResponseResult>, response: Response<ResponseResult>) {
+                    val refuseAdapter: ResponseResult
                     if (response.body() != null) {
-                        refuseAdapter = (response.body() as RefuseOrder)
+                        refuseAdapter = (response.body() as ResponseResult)
                         val messageCode = refuseAdapter.message_code.toInt()
                         val myCallback = {
                             finish()
@@ -206,7 +206,7 @@ class OrderActivity : BaseActivity(
                     }
                 }
 
-                override fun onFailure(call: Call<RefuseOrder>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
                     toast("On failure ${t.message}")
                 }
             })

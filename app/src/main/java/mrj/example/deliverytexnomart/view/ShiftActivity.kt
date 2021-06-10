@@ -10,7 +10,14 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
+import mrj.example.deliverytexnomart.common.ShiftChangeCommon
 import mrj.example.deliverytexnomart.databinding.ShiftActivityBinding
+import mrj.example.deliverytexnomart.model.C
+import mrj.example.deliverytexnomart.model.PostDataShiftChange
+import mrj.example.deliverytexnomart.model.ResponseResult
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ShiftActivity : BaseActivity() {
 
@@ -24,29 +31,54 @@ class ShiftActivity : BaseActivity() {
         binding = ShiftActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnOpenShift.setOnClickListener {
-            enbaleLogin()
-            mRocket = findViewById(R.id.rocket)
-            val valueAnimator = ValueAnimator.ofFloat(0f, -mScreenHeight)
-            valueAnimator.addUpdateListener { animation ->
-                val value = animation.animatedValue as Float
-                mRocket.translationY = value
-            }
-            valueAnimator.interpolator = LinearInterpolator()
-            valueAnimator.duration = DEFAULTANIMATIONDURATION
-            valueAnimator.start()
-
-            val handler = Handler(Looper.getMainLooper())
-            handler.postDelayed({
-                openOrderList()
-            }, DEFAULTANIMATIONDURATION)
-
+            openOrderList()
         }
         setActionBar(binding.includeToolbar.myToolbar)
     }
 
+    private fun clickListenerToOpenShift() {
+        enableLoginBtn()
+        mRocket = findViewById(R.id.rocket)
+        val valueAnimator = ValueAnimator.ofFloat(0f, -mScreenHeight)
+        valueAnimator.addUpdateListener { animation ->
+            val value = animation.animatedValue as Float
+            mRocket.translationY = value
+        }
+        valueAnimator.interpolator = LinearInterpolator()
+        valueAnimator.duration = DEFAULTANIMATIONDURATION
+        valueAnimator.start()
+
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            startActivity(Intent(this, OrdersActivity::class.java))
+            finish()
+        }, DEFAULTANIMATIONDURATION)
+    }
+
     private fun openOrderList() {
-        startActivity(Intent(this, OrdersActivity::class.java))
-        finish()
+        val myCallback = {
+            clickListenerToOpenShift()
+        }
+        val body = PostDataShiftChange(C.current_user.login, C.current_user.password, "open")
+        ShiftChangeCommon.retrofitService.getResponse(body)
+            .enqueue(object : Callback<ResponseResult> {
+                override fun onResponse(
+                    call: Call<ResponseResult>,
+                    response: Response<ResponseResult>
+                ) {
+                    if (response.body() != null) {
+                        val currentAdapter = (response.body() as ResponseResult)
+                        val messageCode = currentAdapter.message_code.toInt()
+                        catchExceptionShowDialog(messageCode, myCallback)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
+                    toast("On failure ${t.message}")
+                    enableLoginBtn(true)
+                }
+
+            })
     }
 
     override fun onResume() {
@@ -65,7 +97,7 @@ class ShiftActivity : BaseActivity() {
         mScreenHeight = displayMetrics.heightPixels.toFloat()
     }
 
-    private fun enbaleLogin(enable: Boolean = false) {
+    private fun enableLoginBtn(enable: Boolean = false) {
         binding.btnOpenShift.isEnabled = enable
     }
 }
