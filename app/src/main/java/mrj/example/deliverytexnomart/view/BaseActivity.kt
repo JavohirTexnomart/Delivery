@@ -1,4 +1,4 @@
-package mrj.example.deliverytexnomart
+package mrj.example.deliverytexnomart.view
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.Order
 
@@ -93,7 +94,7 @@ open class BaseActivity(
         }
     }
 
-    fun showCustomDialog(title: String) {
+    private fun showCustomDialog(title: String) {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setNegativeButton(android.R.string.ok, null)
@@ -112,7 +113,7 @@ open class BaseActivity(
         if (intent.extras != null) {
             val curOrder =
                 intent.getParcelableExtra(C.ORDER_KEY) ?: Order()
-            if (!curOrder.number.equals("1") && !curOrder.address.equals("1"))
+            if (curOrder.number != "1" && curOrder.address != "1")
                 title = resources.getString(titleId, curOrder.number)
         }
     }

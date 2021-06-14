@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
-import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.AdminUserCommon
 import mrj.example.deliverytexnomart.common.UserCommon
@@ -19,7 +18,7 @@ import retrofit2.Response
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: MainActivityBinding
-    lateinit var userAdapter: UserResponse
+    private lateinit var userAdapter: UserResponse
     lateinit var adminUserAdapter: AdminUserResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +73,7 @@ class MainActivity : BaseActivity() {
                 if (user.status == "open") {
                     startActivity(Intent(this, OrdersActivity::class.java))
                     finish()
-                }else{
+                } else {
                     startActivity(Intent(this, ShiftActivity::class.java))
                     finish()
                 }
@@ -115,7 +114,7 @@ class MainActivity : BaseActivity() {
             .setTitle(resources.getString(R.string.text_login_as_admin))
             .setPositiveButton(
                 android.R.string.ok
-            ) { dialog, which ->
+            ) { _, _ ->
                 checkAdminUserProfile(etxtLogin.text.toString(), etxtPwd.text.toString())
             }
             .setNegativeButton(android.R.string.cancel, null)

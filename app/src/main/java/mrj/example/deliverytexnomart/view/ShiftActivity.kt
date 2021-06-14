@@ -8,7 +8,6 @@ import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.LinearInterpolator
-import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.ShiftChangeCommon
 import mrj.example.deliverytexnomart.databinding.ShiftActivityBinding

@@ -2,7 +2,6 @@ package mrj.example.deliverytexnomart.view
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.databinding.CarSelectActivityBinding
 import mrj.example.deliverytexnomart.model.C
 

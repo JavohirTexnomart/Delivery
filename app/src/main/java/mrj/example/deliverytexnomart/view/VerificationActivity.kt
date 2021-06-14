@@ -6,7 +6,6 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
-import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.ConfirmMessageCommon
 import mrj.example.deliverytexnomart.databinding.VerificationActivityBinding

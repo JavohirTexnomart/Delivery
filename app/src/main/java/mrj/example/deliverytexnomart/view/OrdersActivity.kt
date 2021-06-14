@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import mrj.example.deliverytexnomart.BaseActivity
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.OrderAdapter
 import mrj.example.deliverytexnomart.common.OrdersCommon
