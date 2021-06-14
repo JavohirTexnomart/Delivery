@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:orderInCategory="100"
         android:id="@+id/item_transfer_order"
         android:icon="@drawable/ic_calendar"
+        android:orderInCategory="100"
         android:title="@string/text_transfer_order"
         app:showAsAction="never" />
     <item
-        android:orderInCategory="101"
         android:id="@+id/item_close_shift"
         android:icon="@drawable/ic_logout"
+        android:orderInCategory="101"
         android:title="@string/text_close_shift"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_refresh_list"
+        android:icon="@drawable/ic_logout"
+        android:orderInCategory="102"
+        android:title="@string/text_refresh"
         app:showAsAction="never" />
 </menu>

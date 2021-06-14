@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface RefuseOrderService {
-    @POST("javoxir_ut_texnomart/hs/deliverymobapp/refuseorder")
+interface TransferService {
+    @POST("javoxir_ut_texnomart/hs/deliverymobapp/transferorder")
     fun getResponse(@Body data: PostDataOrder): Call<ResponseResult>
 }

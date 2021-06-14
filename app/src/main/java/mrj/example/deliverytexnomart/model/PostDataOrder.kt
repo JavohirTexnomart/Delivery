@@ -1,6 +1,6 @@
 package mrj.example.deliverytexnomart.model
 
-data class PostDataRefuseOrder(
+data class PostDataOrder(
     var all: Boolean,
     var goods: Array<String>,
     var number: String?,
@@ -12,7 +12,7 @@ data class PostDataRefuseOrder(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as PostDataRefuseOrder
+        other as PostDataOrder
 
         if (all != other.all) return false
         if (!goods.contentEquals(other.goods)) return false

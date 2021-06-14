@@ -3,8 +3,11 @@ package mrj.example.deliverytexnomart.view
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -94,11 +97,19 @@ open class BaseActivity(
         }
     }
 
-    private fun showCustomDialog(title: String) {
-        AlertDialog.Builder(this)
-            .setTitle(title)
-            .setNegativeButton(android.R.string.ok, null)
-            .create().show()
+    private fun showCustomDialog(currentTitle: String) {
+
+        val view = LayoutInflater.from(this).inflate(R.layout.error_layout, null)
+        view.findViewById<TextView>(R.id.txt_error).text = currentTitle
+        val builder = AlertDialog.Builder(this)
+            .setView(view)
+            //.setTitle(currentTitle)
+            //.setNegativeButton(android.R.string.ok, null)
+            .create()
+        view.findViewById<Button>(R.id.btn_confirm_order).setOnClickListener {
+            builder.cancel()
+        }
+        builder.show()
     }
 
     @SuppressLint("StringFormatInvalid")

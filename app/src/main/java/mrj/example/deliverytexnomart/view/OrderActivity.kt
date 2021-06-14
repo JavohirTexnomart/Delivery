@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.GoodAdapter
 import mrj.example.deliverytexnomart.common.GoodCommon
-import mrj.example.deliverytexnomart.common.RefuseOrderCommon
+import mrj.example.deliverytexnomart.common.RefuseTransferOrderCommon
 import mrj.example.deliverytexnomart.databinding.OrderActivityBinding
 import mrj.example.deliverytexnomart.model.*
 import retrofit2.*
@@ -178,7 +178,7 @@ class OrderActivity : BaseActivity(
     }
 
     private fun refuseOrder(all: Boolean, goods: Array<String>) {
-        val postData = PostDataRefuseOrder(
+        val postData = PostDataOrder(
             number = order.number,
             date = order.date,
             numberRouteSheet = order.numberRouteSheet,
@@ -187,7 +187,7 @@ class OrderActivity : BaseActivity(
             goods = goods
         )
 
-        RefuseOrderCommon.retrofitService.getResponse(postData)
+        RefuseTransferOrderCommon.retrofitService.getResponse(postData)
             .enqueue(object : Callback<ResponseResult> {
                 override fun onResponse(call: Call<ResponseResult>, response: Response<ResponseResult>) {
                     val refuseAdapter: ResponseResult
@@ -202,6 +202,8 @@ class OrderActivity : BaseActivity(
                         if (messageCode != 200) {
                             enableButtons()
                         }
+                    }else{
+                        enableButtons()
                     }
                 }
 

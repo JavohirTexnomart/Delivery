@@ -52,6 +52,7 @@
 
     <string name="text_are_you_sure_you_want_to_cancel_your_order">Are you sure you want to cancel your order?</string>
     <string name="text_all">ALL</string>
+    <string name="text_refresh">Refresh</string>
 
     <array name="order_status">
         <item>All</item>
