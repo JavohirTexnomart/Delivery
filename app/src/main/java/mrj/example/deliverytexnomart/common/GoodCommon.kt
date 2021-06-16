@@ -6,5 +6,5 @@ import mrj.example.deliverytexnomart.service.OrderService
 
 object GoodCommon {
     val retrofitService: OrderService
-        get() = Client.getClient(C.url_1c).create(OrderService::class.java)
+        get() = Client.getClient(C.url1c).create(OrderService::class.java)
 }

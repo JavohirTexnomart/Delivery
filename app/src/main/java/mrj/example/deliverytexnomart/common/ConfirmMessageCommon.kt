@@ -6,5 +6,5 @@ import mrj.example.deliverytexnomart.service.ConfirmMessageService
 
 object ConfirmMessageCommon {
     val retrofitService: ConfirmMessageService
-        get() = Client.getClient(C.url_1c).create(ConfirmMessageService::class.java)
+        get() = Client.getClient(C.url1c).create(ConfirmMessageService::class.java)
 }

@@ -7,9 +7,9 @@ import mrj.example.deliverytexnomart.service.TransferService
 
 object RefuseTransferOrderCommon {
     val retrofitService: RefuseOrderService
-        get() = Client.getClient(C.url_1c).create(RefuseOrderService::class.java)
+        get() = Client.getClient(C.url1c).create(RefuseOrderService::class.java)
 
     val retrofitTransferService: TransferService
-        get() = Client.getClient(C.url_1c).create(TransferService::class.java)
+        get() = Client.getClient(C.url1c).create(TransferService::class.java)
 
 }

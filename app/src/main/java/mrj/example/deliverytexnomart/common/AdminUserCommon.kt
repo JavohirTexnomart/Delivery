@@ -6,5 +6,5 @@ import mrj.example.deliverytexnomart.service.AdminUserService
 
 object AdminUserCommon {
     val retrofitService: AdminUserService
-        get() = Client.getClient(C.url_1c).create(AdminUserService::class.java)
+        get() = Client.getClient(C.url1c).create(AdminUserService::class.java)
 }
