@@ -10,10 +10,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.Toolbar
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.Order
+
 
 /**
  * Created by JavohirAI
@@ -31,11 +33,15 @@ open class BaseActivity(
         super.onCreate(savedInstanceState)
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (menuResId == 110) {
             return super.onCreateOptionsMenu(menu)
         }
         menuInflater.inflate(menuResId, menu)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         return true
     }
 
