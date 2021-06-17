@@ -18,4 +18,7 @@
     <dimen name="margin_clock_top">60dp</dimen>
 
     <dimen name="margin_verification_etxt_top">30dp</dimen>
+
+    <dimen name="margin_text_loading">32dp</dimen>
+    <dimen name="margin_pb_loading">8dp</dimen>
 </resources>
