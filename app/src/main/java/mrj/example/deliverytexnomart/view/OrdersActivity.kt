@@ -20,11 +20,14 @@ import retrofit2.Response
  * Created by JavohirAI
  */
 
-class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
+class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayEnabled = true) {
 
     lateinit var adapter: OrdersResponse
     lateinit var orders: MutableList<Order>
     private lateinit var binding: OrdersActivityBinding
+
+    lateinit var numberRouteSheet: String
+    lateinit var dateRouteSheet: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,11 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         setContentView(binding.root)
         adapter = OrdersResponse()
         orders = mutableListOf()
+
+        if (intent.extras != null) {
+            numberRouteSheet = intent.getStringExtra(C.KEY_ROUTE_SHEET_NUMBER)!!
+            dateRouteSheet = intent.getStringExtra(C.KEY_ROUTE_SHEET_DATE)!!
+        }
 
         showOrders()
         bindingFull()
@@ -118,7 +126,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
         orders.clear()
         OrdersCommon.retrofitService.getOrders(
             C.current_user.code_client,
-            C.getNameSelectedCar(this)
+            C.getNameSelectedCar(this), numberRouteSheet, dateRouteSheet
         )
             .enqueue(object : Callback<OrdersResponse> {
                 override fun onFailure(call: Call<OrdersResponse>, t: Throwable) {
@@ -134,6 +142,10 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu) {
                         val messageCode = adapter.message_code.toInt()
                         val callback = {
                             orders.addAll(adapter.result)
+                            if (orders.size == 0) {
+                                C.routesheet_closed = true
+                                finish()
+                            }
                             bindingFull()
                         }
                         catchExceptionShowDialog(messageCode, callback)

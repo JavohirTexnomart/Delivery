@@ -1,9 +1,7 @@
 package mrj.example.deliverytexnomart.view
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.RouteSheetAdapter
 import mrj.example.deliverytexnomart.common.RouteSheetCommon
 import mrj.example.deliverytexnomart.databinding.RoutesheetActivityBinding
@@ -28,6 +26,23 @@ class RouteSheetActivity : BaseActivity() {
         routeSheetList = mutableListOf()
         routeSheetList.clear()
 
+        binding.apply {
+            setActionBar(includeToolbar.myToolbar)
+            rvRouteSheets.layoutManager = LinearLayoutManager(this@RouteSheetActivity)
+        }
+        bind()
+        showRouteSheets()
+
+    }
+
+    private fun bind() {
+        binding.apply {
+            rvRouteSheets.adapter = RouteSheetAdapter(routeSheetList)
+            rvRouteSheets.adapter!!.notifyDataSetChanged()
+        }
+    }
+
+    private fun showRouteSheets(){
         RouteSheetCommon.retrofitService.getRouteSheets(
             C.current_user.code_client,
             C.getNameSelectedCar(this)
@@ -52,18 +67,13 @@ class RouteSheetActivity : BaseActivity() {
                     }
                 }
             })
-
-        binding.apply {
-            setActionBar(includeToolbar.myToolbar)
-            rvRouteSheets.layoutManager = LinearLayoutManager(this@RouteSheetActivity)
-        }
-        bind()
     }
 
-    private fun bind() {
-        binding.apply {
-            rvRouteSheets.adapter = RouteSheetAdapter(routeSheetList)
-            rvRouteSheets.adapter!!.notifyDataSetChanged()
+    override fun onResume() {
+        super.onResume()
+        if (C.order_closed) {
+            showRouteSheets()
+            C.routesheet_closed = !C.routesheet_closed
         }
     }
 }
