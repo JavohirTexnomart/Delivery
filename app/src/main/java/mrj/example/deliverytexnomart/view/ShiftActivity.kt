@@ -49,7 +49,7 @@ class ShiftActivity : BaseActivity() {
 
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            startActivity(Intent(this, OrdersActivity::class.java))
+            startActivity(Intent(this, RouteSheetActivity::class.java))
             finish()
         }, DEFAULTANIMATIONDURATION)
     }

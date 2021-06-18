@@ -71,7 +71,7 @@ class MainActivity : BaseActivity() {
                 val user = userAdapter.result
                 C.current_user = user
                 if (user.status == "open") {
-                    startActivity(Intent(this, OrdersActivity::class.java))
+                    startActivity(Intent(this, RouteSheetActivity::class.java))
                     finish()
                 } else {
                     startActivity(Intent(this, ShiftActivity::class.java))

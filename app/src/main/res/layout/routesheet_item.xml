@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/constraint_routesheet"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_start"
+    android:background="@drawable/shape_constraint">
+
+    <TextView
+        android:id="@+id/txt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_start"
+        android:text="@string/text_number"
+        android:textSize="@dimen/default_text_size_h3"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/gline_for_elements"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start"
+        android:text="@string/text_date"
+        android:textSize="@dimen/default_text_size_h2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txt_number"
+        app:layout_constraintEnd_toStartOf="@+id/img_open_order"
+        app:layout_constraintStart_toEndOf="@+id/txt_number" />
+
+    <ImageView
+        android:id="@+id/img_open_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_start"
+        android:layout_marginEnd="@dimen/margin_end"
+        android:contentDescription="@string/text_open_order"
+        android:paddingStart="@dimen/margin_top_start"
+        android:paddingEnd="@dimen/margin_top_start"
+        android:src="@drawable/open_order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/delimiter"
+        style="@style/Delimiter"
+        android:layout_marginTop="@dimen/margin_top_start"
+        app:layout_constraintStart_toStartOf="@id/txt_number"
+        app:layout_constraintTop_toBottomOf="@+id/txt_number" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gline_for_elements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
