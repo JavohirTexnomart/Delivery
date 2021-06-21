@@ -66,7 +66,7 @@
         android:layout_marginTop="@dimen/margin_top"
         android:text="@string/text_contact_person"
         app:layout_constraintStart_toStartOf="@+id/gline_for_elements"
-        app:layout_constraintTop_toBottomOf="@+id/txtTextContactPerson"
+        app:layout_constraintTop_toBottomOf="@+id/iv_person"
         tools:layout_editor_absoluteX="8dp" />
 
     <TextView
@@ -130,5 +130,16 @@
         android:src="@drawable/ic_phone_call"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_person"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="@dimen/margin_top"
+        android:contentDescription="@string/text_example_clock"
+        android:src="@drawable/example_person"
+        app:layout_constraintStart_toStartOf="@+id/gline_for_elements"
+        app:layout_constraintTop_toBottomOf="@+id/txtTextContactPerson"
+        tools:srcCompat="@drawable/example_person" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

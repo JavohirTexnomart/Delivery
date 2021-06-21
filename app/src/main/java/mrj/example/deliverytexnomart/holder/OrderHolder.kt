@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
             txtContactPerson.text = order.contactPerson
             txtPhone.text = order.phoneNumber
             txtAddress.text = order.address
-
+            ivPerson.visibility = View.GONE
             imgOpenOrder.apply {
                 setOnClickListener {
                     val context = this.context

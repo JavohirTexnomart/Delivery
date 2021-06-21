@@ -78,9 +78,6 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
             R.id.item_close_shift -> {
                 changeShiftAndDoCallBack(myCallback)
             }
-            R.id.item_transfer_order -> {
-                transferOrders()
-            }
             R.id.item_refresh_list -> {
                 showOrders()
             }
@@ -97,41 +94,6 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
         filterActivityLauncher.launch(intent)
     }
 
-
-    private fun transferOrders() {
-        orders.forEach { order ->
-            val postData = PostDataOrder(
-                number = order.number,
-                date = order.date,
-                numberRouteSheet = order.numberRouteSheet,
-                dateRouteSheet = order.dateRouteSheet,
-                all = true,
-                goods = arrayOf()
-            )
-
-            RefuseTransferOrderCommon.retrofitTransferService.getResponse(postData)
-                .enqueue(object : Callback<ResponseResult> {
-                    override fun onResponse(
-                        call: Call<ResponseResult>,
-                        response: Response<ResponseResult>
-                    ) {
-                        val refuseAdapter: ResponseResult
-                        if (response.body() != null) {
-                            refuseAdapter = (response.body() as ResponseResult)
-                            val messageCode = refuseAdapter.message_code.toInt()
-                            val myCallback = {
-                                showOrders()
-                            }
-                            catchExceptionShowDialog(messageCode, myCallback)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
-                        toast("On failure ${t.message}")
-                    }
-                })
-        }
-    }
 
     private fun changeShiftAndDoCallBack(myCallback: () -> Unit) {
         val body = PostDataShiftChange(C.current_user.login, C.current_user.password, "close")

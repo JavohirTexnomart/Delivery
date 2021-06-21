@@ -88,6 +88,9 @@ class OrderActivity : BaseActivity(
                 btnRefuseOrder.setOnClickListener {
                     showDialogRefuseOrder()
                 }
+                btnTransferOrder.setOnClickListener {
+
+                }
             }
             rvGoods.layoutManager = LinearLayoutManager(this@OrderActivity)
             rvGoods.adapter = GoodAdapter(goods)
@@ -189,7 +192,10 @@ class OrderActivity : BaseActivity(
 
         RefuseTransferOrderCommon.retrofitService.getResponse(postData)
             .enqueue(object : Callback<ResponseResult> {
-                override fun onResponse(call: Call<ResponseResult>, response: Response<ResponseResult>) {
+                override fun onResponse(
+                    call: Call<ResponseResult>,
+                    response: Response<ResponseResult>
+                ) {
                     val refuseAdapter: ResponseResult
                     if (response.body() != null) {
                         refuseAdapter = (response.body() as ResponseResult)
@@ -202,7 +208,7 @@ class OrderActivity : BaseActivity(
                         if (messageCode != 200) {
                             enableButtons()
                         }
-                    }else{
+                    } else {
                         enableButtons()
                     }
                 }
@@ -212,5 +218,38 @@ class OrderActivity : BaseActivity(
                 }
             })
     }
+
+//    private fun transferOrders() {
+//        val postData = PostDataOrder(
+//            number = order.number,
+//            date = order.date,
+//            numberRouteSheet = order.numberRouteSheet,
+//            dateRouteSheet = order.dateRouteSheet,
+//            all = true,
+//            goods = arrayOf()
+//        )
+//
+//        RefuseTransferOrderCommon.retrofitTransferService.getResponse(postData)
+//            .enqueue(object : Callback<ResponseResult> {
+//                override fun onResponse(
+//                    call: Call<ResponseResult>,
+//                    response: Response<ResponseResult>
+//                ) {
+//                    val refuseAdapter: ResponseResult
+//                    if (response.body() != null) {
+//                        refuseAdapter = (response.body() as ResponseResult)
+//                        val messageCode = refuseAdapter.message_code.toInt()
+//                        val myCallback = {
+//                            showOrders()
+//                        }
+//                        catchExceptionShowDialog(messageCode, myCallback)
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
+//                    toast("On failure ${t.message}")
+//                }
+//            })
+//    }
 
 }
