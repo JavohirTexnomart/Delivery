@@ -27,6 +27,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
         setActionBar(toolbar = binding.includeToolbar.myToolbar)
 
+        binding.etxtText.setText(C.getUserName(this))
         binding.imgOpenShowdialog.setOnClickListener {
             showDialogConfirmAdmin()
         }
@@ -71,9 +72,11 @@ class MainActivity : BaseActivity() {
                 val user = userAdapter.result
                 C.current_user = user
                 if (user.status == "open") {
+                    C.setUserName(this, user.login)
                     startActivity(Intent(this, RouteSheetActivity::class.java))
                     finish()
                 } else {
+                    C.setUserName(this, user.login)
                     startActivity(Intent(this, ShiftActivity::class.java))
                     finish()
                 }

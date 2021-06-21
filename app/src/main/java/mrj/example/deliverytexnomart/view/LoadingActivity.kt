@@ -17,7 +17,7 @@ class LoadingActivity : BaseActivity() {
         binding = LoadingActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.apply {
-            txtVersion.text = BuildConfig.VERSION_NAME
+            txtVersion.text = "v${BuildConfig.VERSION_NAME}"
         }
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({

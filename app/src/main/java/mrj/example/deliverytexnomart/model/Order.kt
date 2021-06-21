@@ -11,6 +11,7 @@ import android.os.Parcelable
 class Order() : Parcelable {
     var number = ""
     var date = ""
+    var dateInNumber = ""
     var address = ""
     var contactPerson = ""
     var phoneNumber = ""
@@ -20,6 +21,7 @@ class Order() : Parcelable {
     constructor(
         number: String?,
         date: String?,
+        dateInNumber: String?,
         address: String?,
         contactPerson: String?,
         phoneNumber: String?,
@@ -28,6 +30,7 @@ class Order() : Parcelable {
     ) : this() {
         this.number = number!!
         this.date = date!!
+        this.dateInNumber = dateInNumber!!
         this.address = address!!
         this.contactPerson = contactPerson!!
         this.phoneNumber = phoneNumber!!
@@ -42,6 +45,7 @@ class Order() : Parcelable {
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
         parcel.readString()
     ) {
     }
@@ -49,6 +53,7 @@ class Order() : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(number)
         parcel.writeString(date)
+        parcel.writeString(dateInNumber)
         parcel.writeString(address)
         parcel.writeString(contactPerson)
         parcel.writeString(phoneNumber)

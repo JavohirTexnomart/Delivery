@@ -60,4 +60,7 @@
     <string name="error_can_not_found_realization">Невозможно записать заказ клиента</string>
     <string name="error_can_not_create_route_sheet">Невозможно создать заявку на возврат</string>
     <string name="text_refresh">Обновить</string>
+    <string name="text_filter_orders">Фильтр</string>
+    <string name="text_filter_descending">По убыванию</string>
+    <string name="text_filter_ascending">По возрастанию</string>
 </resources>

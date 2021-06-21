@@ -36,6 +36,12 @@
     <string name="text_clock">Clock</string>
     <string name="text_example_clock">2:45</string>
     <string name="text_send_againg"><u>Send againg</u></string>
+    <string name="text_all">ALL</string>
+    <string name="text_refresh">Refresh</string>
+    <string name="text_are_you_sure_you_want_to_cancel_your_order">Are you sure you want to cancel your order?</string>
+    <string name="text_filter_orders">Filter</string>
+    <string name="text_filter_descending">Descending</string>
+    <string name="text_filter_ascending">Ascending</string>
 
     <string name="error_field_empty">Field empty</string>
     <string name="error_user_not_found">User not found</string>
@@ -50,9 +56,6 @@
     <string name="error_can_not_found_realization">Can not found realization document</string>
     <string name="error_can_not_create_route_sheet">Can not create route sheet</string>
 
-    <string name="text_are_you_sure_you_want_to_cancel_your_order">Are you sure you want to cancel your order?</string>
-    <string name="text_all">ALL</string>
-    <string name="text_refresh">Refresh</string>
 
     <array name="order_status">
         <item>All</item>

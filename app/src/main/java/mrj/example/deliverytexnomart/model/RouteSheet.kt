@@ -2,7 +2,8 @@ package mrj.example.deliverytexnomart.model
 
 class RouteSheet(
     var number: String,
-    var date: String
+    var date: String,
+    var dateInNumber: String
 ) {
 }
 

@@ -1,9 +1,11 @@
 package mrj.example.deliverytexnomart.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.OrderAdapter
@@ -24,15 +26,36 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
 
     lateinit var adapter: OrdersResponse
     lateinit var orders: MutableList<Order>
+    lateinit var filterList: MutableList<String>
+    lateinit var currentFilter: String
     private lateinit var binding: OrdersActivityBinding
 
     lateinit var numberRouteSheet: String
     lateinit var dateRouteSheet: String
 
+    var filterActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+            if (data != null) {
+                currentFilter = data.getStringExtra(C.keySelectedSortFilterOrders).toString()
+                bindingFull()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = OrdersActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        filterList = mutableListOf()
+        filterList.add(resources.getString(R.string.text_filter_ascending))
+        filterList.add(resources.getString(R.string.text_filter_descending))
+        currentFilter = filterList.get(0)
+
         adapter = OrdersResponse()
         orders = mutableListOf()
 
@@ -61,9 +84,19 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
             R.id.item_refresh_list -> {
                 showOrders()
             }
+            R.id.item_filter -> {
+                openFilterActivity()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun openFilterActivity() {
+        val intent = Intent(this, FilterActivity::class.java)
+        intent.putExtra(C.keyFilterArray, filterList.toTypedArray())
+        filterActivityLauncher.launch(intent)
+    }
+
 
     private fun transferOrders() {
         orders.forEach { order ->
@@ -159,6 +192,12 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
     }
 
     private fun bindingFull() {
+        orders.sortBy {
+            it.dateInNumber
+        }
+        if (currentFilter != filterList[0]) {
+            orders.reverse()
+        }
         binding.apply {
             rvOrders.adapter = OrderAdapter(order_list = orders)
             rvOrders.adapter!!.notifyDataSetChanged()
