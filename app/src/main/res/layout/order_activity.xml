@@ -102,7 +102,8 @@
                 android:layout_marginEnd="@dimen/margin_end"
                 android:background="@drawable/shape_btn_refuse"
                 android:drawableLeft="@drawable/ic_calendar"
-                android:text="@string/text_transfer_order" />
+                android:text="@string/text_transfer_order"
+                tools:ignore="RtlHardcoded" />
         </LinearLayout>
 
         <LinearLayout

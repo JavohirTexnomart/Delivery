@@ -47,7 +47,7 @@
         style="@style/Delimiter"
         android:layout_marginTop="@dimen/margin_top_start"
         app:layout_constraintStart_toStartOf="@id/txt_number"
-        app:layout_constraintTop_toBottomOf="@+id/txt_number" />
+        app:layout_constraintTop_toBottomOf="@+id/chb_goods_received" />
 
     <TextView
         android:id="@+id/txtTextContactPerson"
@@ -98,7 +98,7 @@
         android:layout_marginTop="@dimen/margin_top_start"
         android:text="@string/text_phone"
         app:layout_constraintStart_toStartOf="@id/gline_for_elements"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/etxt_floor" />
 
     <TextView
         android:id="@+id/txtPhone"
@@ -141,5 +141,37 @@
         app:layout_constraintStart_toStartOf="@+id/gline_for_elements"
         app:layout_constraintTop_toBottomOf="@+id/txtTextContactPerson"
         tools:srcCompat="@drawable/example_person" />
+
+    <CheckBox
+        android:id="@+id/chb_goods_received"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/margin_top"
+        android:text="@string/text_goods_received"
+        app:layout_constraintStart_toStartOf="@+id/gline_for_elements"
+        app:layout_constraintTop_toBottomOf="@+id/txt_number" />
+
+    <TextView
+        android:id="@+id/txtFloor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_floor"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etxt_floor"
+        app:layout_constraintStart_toStartOf="@+id/gline_for_elements" />
+
+    <EditText
+        android:id="@+id/etxt_floor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start"
+        android:layout_marginTop="@dimen/margin_top"
+        android:autofillHints="@string/text_floor"
+        android:ems="10"
+        android:hint="@string/text_floor"
+        android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txtFloor"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

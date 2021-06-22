@@ -35,6 +35,9 @@ class OrderHolder(var itemViewbinding: OrderItemActivityBinding) :
             txtPhone.text = order.phoneNumber
             txtAddress.text = order.address
             ivPerson.visibility = View.GONE
+            chbGoodsReceived.visibility = View.GONE
+            etxtFloor.visibility = View.GONE
+            txtFloor.visibility = View.GONE
             imgOpenOrder.apply {
                 setOnClickListener {
                     val context = this.context
