@@ -100,6 +100,9 @@ open class BaseActivity(
             resources.getInteger(R.integer.error_can_not_create_route_sheet) -> showCustomDialog(
                 resources.getString(R.string.error_can_not_create_route_sheet)
             )
+            resources.getInteger(R.integer.error_can_not_connect) -> showCustomDialog(
+                resources.getString(R.string.error_can_not_create_route_sheet)
+            )
         }
     }
 

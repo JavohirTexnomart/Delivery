@@ -55,6 +55,7 @@
     <string name="error_can_not_close_route_sheet">Can not close rout sheet</string>
     <string name="error_can_not_found_realization">Can not found realization document</string>
     <string name="error_can_not_create_route_sheet">Can not create route sheet</string>
+    <string name="error_can_not_connect">Can not connect server</string>
     <string name="text_goods_received">Goods received</string>
     <string name="text_floor">Floor</string>
 

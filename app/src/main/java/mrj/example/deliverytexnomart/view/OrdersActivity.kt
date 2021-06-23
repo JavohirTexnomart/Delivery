@@ -107,6 +107,8 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
                         val currentAdapter = (response.body() as ResponseResult)
                         val messageCode = currentAdapter.message_code.toInt()
                         catchExceptionShowDialog(messageCode, myCallback)
+                    }else {
+                        catchExceptionShowDialog(R.integer.error_can_not_connect, {})
                     }
                 }
 

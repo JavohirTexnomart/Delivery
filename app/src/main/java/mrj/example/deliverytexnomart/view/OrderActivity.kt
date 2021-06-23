@@ -77,6 +77,8 @@ class OrderActivity : BaseActivity(
                 txtPhone.text = order.phoneNumber
                 txtAddress.text = order.address
                 imgOpenOrder.isVisible = false
+                ivPerson.isVisible = false
+                chbGoodsReceived.isVisible = false
                 imgCallClient.setOnClickListener {
                     openCallDial(binding.root.context, order.phoneNumber)
                 }

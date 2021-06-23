@@ -63,6 +63,9 @@ class MainActivity : BaseActivity() {
         if (response.body() != null) {
             userAdapter = (response.body() as UserResponse)
             checkResultOfBody(userAdapter.message_code.toInt(), true)
+        } else {
+            enbaleLogin(true)
+            catchExceptionShowDialog(R.integer.error_can_not_connect, {})
         }
     }
 
@@ -139,6 +142,9 @@ class MainActivity : BaseActivity() {
                     if (response.body() != null) {
                         adminUserAdapter = (response.body() as AdminUserResponse)
                         checkResultOfBody(adminUserAdapter.message_code.toInt(), false)
+                    }else {
+                        enbaleLogin(true)
+                        catchExceptionShowDialog(R.integer.error_can_not_connect, {})
                     }
                 }
             })

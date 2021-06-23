@@ -65,4 +65,5 @@
     <string name="text_filter_ascending">По возрастанию</string>
     <string name="text_goods_received">Товар получен</string>
     <string name="text_floor">Этаж</string>
+    <string name="error_can_not_connect">Не удалось установить соединение</string>
 </resources>
