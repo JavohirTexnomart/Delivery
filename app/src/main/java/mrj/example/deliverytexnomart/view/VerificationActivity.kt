@@ -12,6 +12,7 @@ import mrj.example.deliverytexnomart.databinding.VerificationActivityBinding
 import mrj.example.deliverytexnomart.model.C
 import mrj.example.deliverytexnomart.model.ConfirmMessage
 import mrj.example.deliverytexnomart.model.Order
+import mrj.example.deliverytexnomart.model.PostDataConfirmOrder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,15 +60,18 @@ class VerificationActivity : BaseActivity(homeDislpayEnabled = true) {
                 sendLetter = true
                 enableConfirmButton(!sendLetter)
                 ConfirmMessageCommon.retrofitService.getResponse(
-                    date = order.date,
-                    number = order.number,
-                    dateRouteSheet = order.dateRouteSheet,
-                    numberRouteSheet = order.numberRouteSheet,
-                    numberletter = confirmMessage
+                    PostDataConfirmOrder(
+                        date = order.date,
+                        number = order.number,
+                        dateRouteSheet = order.dateRouteSheet,
+                        numberRouteSheet = order.numberRouteSheet,
+                        numberletter = confirmMessage
+                    )
                 ).enqueue(object : Callback<ConfirmMessage> {
                     override fun onFailure(call: Call<ConfirmMessage>, t: Throwable) {
                         toast("On failure ${t.message}")
                     }
+
                     override fun onResponse(
                         call: Call<ConfirmMessage>,
                         response: Response<ConfirmMessage>

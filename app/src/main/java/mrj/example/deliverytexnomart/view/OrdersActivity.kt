@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.OrderAdapter
 import mrj.example.deliverytexnomart.common.OrdersCommon
-import mrj.example.deliverytexnomart.common.RefuseTransferOrderCommon
 import mrj.example.deliverytexnomart.common.ShiftChangeCommon
 import mrj.example.deliverytexnomart.databinding.OrdersActivityBinding
 import mrj.example.deliverytexnomart.model.*
@@ -107,8 +106,8 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
                         val currentAdapter = (response.body() as ResponseResult)
                         val messageCode = currentAdapter.message_code.toInt()
                         catchExceptionShowDialog(messageCode, myCallback)
-                    }else {
-                        catchExceptionShowDialog(R.integer.error_can_not_connect, {})
+                    } else {
+                        catchExceptionShowDialog(R.integer.error_can_not_connect) {}
                     }
                 }
 

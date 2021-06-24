@@ -1,15 +1,16 @@
 package mrj.example.deliverytexnomart.service
 
 import mrj.example.deliverytexnomart.model.ConfirmMessage
+import mrj.example.deliverytexnomart.model.PostDataConfirmOrder
+import mrj.example.deliverytexnomart.model.PostDataOrder
 import retrofit2.Call
-import retrofit2.http.GET
+import retrofit2.http.Body
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ConfirmMessageService {
-    @GET("javoxir_ut_texnomart/hs/deliverymobapp/confirmletter")
+    @POST("javoxir_ut_texnomart/hs/deliverymobapp/confirmletter")
     fun getResponse(
-        @Query("date") date: String?, @Query("number") number: String?,
-        @Query("dateRouteSheet") dateRouteSheet: String?, @Query("numberRouteSheet") numberRouteSheet: String?,
-    @Query("numberletter") numberletter: String?
+        @Body data: PostDataConfirmOrder
     ): Call<ConfirmMessage>
 }
