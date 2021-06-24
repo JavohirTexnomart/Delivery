@@ -1,5 +1,6 @@
 package mrj.example.deliverytexnomart.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,10 +10,7 @@ import android.view.MenuItem
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.common.ConfirmMessageCommon
 import mrj.example.deliverytexnomart.databinding.VerificationActivityBinding
-import mrj.example.deliverytexnomart.model.C
-import mrj.example.deliverytexnomart.model.ConfirmMessage
-import mrj.example.deliverytexnomart.model.Order
-import mrj.example.deliverytexnomart.model.PostDataConfirmOrder
+import mrj.example.deliverytexnomart.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,8 +78,10 @@ class VerificationActivity : BaseActivity(homeDislpayEnabled = true) {
                             adapter = (response.body() as ConfirmMessage)
                             val messageCode = adapter.message_code.toInt()
                             val callBack = {
-                                C.order_closed = true
-                                finish()
+                                val intent =
+                                    Intent(this@VerificationActivity, ResponseActivity::class.java)
+                                intent.putExtra(C.keyResponseOrder, OrderOperation.CONFIRM)
+                                startActivity(intent)
                             }
                             catchExceptionShowDialog(messageCode, callBack)
                             if (messageCode != 200) {
@@ -105,6 +105,12 @@ class VerificationActivity : BaseActivity(homeDislpayEnabled = true) {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (C.order_closed) {
+            finish()
+        }
+    }
     private fun enableConfirmButton(enable: Boolean) {
         binding.btnConfirmVerification.isEnabled = enable
         binding.txtSendAgain.isEnabled = enable

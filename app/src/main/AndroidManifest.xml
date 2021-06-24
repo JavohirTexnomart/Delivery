@@ -34,6 +34,7 @@
         <activity android:name=".view.ShiftActivity" />
         <activity android:name=".view.OrderActivity" />
         <activity android:name=".view.VerificationActivity" />
+        <activity android:name=".view.ResponseActivity" />
         <activity android:name=".view.RouteSheetActivity" />
     </application>
 

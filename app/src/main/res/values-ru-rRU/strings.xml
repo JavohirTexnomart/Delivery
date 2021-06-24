@@ -2,9 +2,9 @@
 <resources>
     <string name="app_name">Доставщик</string>
 
-    <string name="txt_login">Логин</string>
-    <string name="txt_pwd">Пароль</string>
-    <string name="txt_log_in">Войти</string>
+    <string name="text_login">Логин</string>
+    <string name="text_pwd">Пароль</string>
+    <string name="text_log_in">Войти</string>
 
     <string name="empty_title" />
 
@@ -66,4 +66,9 @@
     <string name="text_goods_received">Товар получен</string>
     <string name="text_floor">Этаж</string>
     <string name="error_can_not_connect">Не удалось установить соединение</string>
+    <string name="text_response">Ответ</string>
+    <string name="text_close">Закрыть</string>
+    <string name="text_confirm_order_response">Смс сообщение подтверждено</string>
+    <string name="text_transfer_order_response">Заказ перенесено успешно</string>
+    <string name="text_refuse_order_response">Заказ отменен</string>
 </resources>

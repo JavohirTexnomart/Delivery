@@ -1,16 +1,15 @@
 <resources>
     <string name="app_name">Delivery Texnomart</string>
 
-    <string name="txt_login">Login</string>
-    <string name="txt_pwd">Password</string>
-    <string name="txt_log_in">Log in</string>
-
     <string name="empty_title" />
     <string name="title_dialog_error">Error</string>
     <string name="title_orders">Orders</string>
     <string name="title_order">Order: %s </string>
     <string name="title_refuse">Order refuse</string>
 
+    <string name="text_login">Login</string>
+    <string name="text_pwd">Password</string>
+    <string name="text_log_in">Log in</string>
     <string name="text_number">№: %s</string>
     <string name="text_date">: %s</string>
     <string name="text_address">Address</string>
@@ -42,6 +41,14 @@
     <string name="text_filter_orders">Filter</string>
     <string name="text_filter_descending">Descending</string>
     <string name="text_filter_ascending">Ascending</string>
+    <string name="text_goods_received">Goods received</string>
+    <string name="text_floor">Floor</string>
+    <string name="text_response">Response text</string>
+    <string name="text_close">Close</string>
+    <string name="text_confirm_order_response">Letter message confirmed</string>
+    <string name="text_transfer_order_response">Order transferred</string>
+    <string name="text_refuse_order_response">Order refused</string>
+
 
     <string name="error_field_empty">Field empty</string>
     <string name="error_user_not_found">User not found</string>
@@ -56,9 +63,6 @@
     <string name="error_can_not_found_realization">Can not found realization document</string>
     <string name="error_can_not_create_route_sheet">Can not create route sheet</string>
     <string name="error_can_not_connect">Can not connect server</string>
-    <string name="text_goods_received">Goods received</string>
-    <string name="text_floor">Floor</string>
-
 
     <array name="order_status">
         <item>All</item>

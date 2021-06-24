@@ -91,7 +91,7 @@ class OrderActivity : BaseActivity(
                     showDialogRefuseOrder()
                 }
                 btnTransferOrder.setOnClickListener {
-
+                    transferOrder()
                 }
             }
             rvGoods.layoutManager = LinearLayoutManager(this@OrderActivity)
@@ -203,8 +203,7 @@ class OrderActivity : BaseActivity(
                         refuseAdapter = (response.body() as ResponseResult)
                         val messageCode = refuseAdapter.message_code.toInt()
                         val myCallback = {
-                            finish()
-                            C.order_closed = true
+                            openResponseActivity(OrderOperation.REFUSE)
                         }
                         catchExceptionShowDialog(messageCode, myCallback)
                         if (messageCode != 200) {
@@ -221,37 +220,43 @@ class OrderActivity : BaseActivity(
             })
     }
 
-//    private fun transferOrders() {
-//        val postData = PostDataOrder(
-//            number = order.number,
-//            date = order.date,
-//            numberRouteSheet = order.numberRouteSheet,
-//            dateRouteSheet = order.dateRouteSheet,
-//            all = true,
-//            goods = arrayOf()
-//        )
-//
-//        RefuseTransferOrderCommon.retrofitTransferService.getResponse(postData)
-//            .enqueue(object : Callback<ResponseResult> {
-//                override fun onResponse(
-//                    call: Call<ResponseResult>,
-//                    response: Response<ResponseResult>
-//                ) {
-//                    val refuseAdapter: ResponseResult
-//                    if (response.body() != null) {
-//                        refuseAdapter = (response.body() as ResponseResult)
-//                        val messageCode = refuseAdapter.message_code.toInt()
-//                        val myCallback = {
-//                            showOrders()
-//                        }
-//                        catchExceptionShowDialog(messageCode, myCallback)
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
-//                    toast("On failure ${t.message}")
-//                }
-//            })
-//    }
+    private fun transferOrder() {
+        val postData = PostDataOrder(
+            number = order.number,
+            date = order.date,
+            numberRouteSheet = order.numberRouteSheet,
+            dateRouteSheet = order.dateRouteSheet,
+            all = true,
+            goods = arrayOf()
+        )
+
+        RefuseTransferOrderCommon.retrofitTransferService.getResponse(postData)
+            .enqueue(object : Callback<ResponseResult> {
+                override fun onResponse(
+                    call: Call<ResponseResult>,
+                    response: Response<ResponseResult>
+                ) {
+                    val refuseAdapter: ResponseResult
+                    if (response.body() != null) {
+                        refuseAdapter = (response.body() as ResponseResult)
+                        val messageCode = refuseAdapter.message_code.toInt()
+                        val myCallback = {
+                            openResponseActivity(OrderOperation.TRANSFER)
+                        }
+                        catchExceptionShowDialog(messageCode, myCallback)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
+                    toast("On failure ${t.message}")
+                }
+            })
+    }
+
+    private fun openResponseActivity(orderOperation: OrderOperation) {
+        val intent = Intent(this@OrderActivity, ResponseActivity::class.java)
+        intent.putExtra(C.keyResponseOrder, orderOperation)
+        startActivity(intent)
+    }
 
 }

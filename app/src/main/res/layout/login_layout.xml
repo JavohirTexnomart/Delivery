@@ -13,8 +13,8 @@
         android:layout_marginStart="@dimen/margin_start"
         android:layout_marginTop="@dimen/margin_top"
         android:layout_marginEnd="@dimen/margin_end"
-        android:autofillHints="@string/txt_login"
-        android:hint="@string/txt_login"
+        android:autofillHints="@string/text_login"
+        android:hint="@string/text_login"
         android:inputType="textAutoCorrect" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
             android:layout_marginTop="@dimen/margin_top"
-            android:autofillHints="@string/txt_pwd"
+            android:autofillHints="@string/text_pwd"
             android:backgroundTint="@color/white"
-            android:hint="@string/txt_pwd"
+            android:hint="@string/text_pwd"
             android:inputType="textPassword"
             tools:targetApi="lollipop" />
 
