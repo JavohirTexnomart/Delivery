@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.adapter.RouteSheetAdapter
 import mrj.example.deliverytexnomart.common.RouteSheetCommon
+import mrj.example.deliverytexnomart.common.ShiftChangeCommon
 import mrj.example.deliverytexnomart.databinding.RoutesheetActivityBinding
-import mrj.example.deliverytexnomart.model.C
-import mrj.example.deliverytexnomart.model.RouteSheet
-import mrj.example.deliverytexnomart.model.RouteSheetsResponse
+import mrj.example.deliverytexnomart.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,6 +79,7 @@ class RouteSheetActivity : BaseActivity(menuResId = R.menu.route_sheet_menu) {
                         adapter = (response.body() as RouteSheetsResponse)
                         val messageCode = adapter.message_code.toInt()
                         val callback = {
+                            routeSheetList.clear()
                             routeSheetList.addAll(adapter.result)
                             bind()
                         }
@@ -91,7 +91,7 @@ class RouteSheetActivity : BaseActivity(menuResId = R.menu.route_sheet_menu) {
 
     override fun onResume() {
         super.onResume()
-        if (C.order_closed) {
+        if (C.routesheet_closed) {
             showRouteSheets()
             C.routesheet_closed = !C.routesheet_closed
         }
@@ -106,8 +106,38 @@ class RouteSheetActivity : BaseActivity(menuResId = R.menu.route_sheet_menu) {
             R.id.item_filter -> {
                 openFilterActivity()
             }
+            R.id.item_close_shift -> {
+                changeShiftAndDoCallBack(myCallback)
+            }
+            R.id.item_refresh_list -> {
+                showRouteSheets()
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun changeShiftAndDoCallBack(myCallback: () -> Unit) {
+        val body = PostDataShiftChange(C.current_user.login, C.current_user.password, "close")
+        ShiftChangeCommon.retrofitService.getResponse(body)
+            .enqueue(object : Callback<ResponseResult> {
+                override fun onResponse(
+                    call: Call<ResponseResult>,
+                    response: Response<ResponseResult>
+                ) {
+                    if (response.body() != null) {
+                        val currentAdapter = (response.body() as ResponseResult)
+                        val messageCode = currentAdapter.message_code.toInt()
+                        catchExceptionShowDialog(messageCode, myCallback)
+                    } else {
+                        catchExceptionShowDialog(R.integer.error_can_not_connect) {}
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
+                    toast("On failure ${t.message}")
+                }
+
+            })
     }
 
     private fun openFilterActivity() {

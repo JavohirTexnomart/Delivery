@@ -1,6 +1,7 @@
 package mrj.example.deliverytexnomart.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import mrj.example.deliverytexnomart.R
 import mrj.example.deliverytexnomart.databinding.ConfirmRefuseResponseLayoutBinding
 import mrj.example.deliverytexnomart.model.C
@@ -37,7 +38,15 @@ class ResponseActivity : BaseActivity(homeDislpayEnabled = true) {
             C.order_closed = true
             finish()
         }
-
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                C.order_closed = true
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

@@ -69,14 +69,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val myCallback = {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
         when (item.itemId) {
-            R.id.item_close_shift -> {
-                changeShiftAndDoCallBack(myCallback)
-            }
             R.id.item_refresh_list -> {
                 showOrders()
             }
@@ -91,31 +84,6 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
         val intent = Intent(this, FilterActivity::class.java)
         intent.putExtra(C.keyFilterArray, filterList.toTypedArray())
         filterActivityLauncher.launch(intent)
-    }
-
-
-    private fun changeShiftAndDoCallBack(myCallback: () -> Unit) {
-        val body = PostDataShiftChange(C.current_user.login, C.current_user.password, "close")
-        ShiftChangeCommon.retrofitService.getResponse(body)
-            .enqueue(object : Callback<ResponseResult> {
-                override fun onResponse(
-                    call: Call<ResponseResult>,
-                    response: Response<ResponseResult>
-                ) {
-                    if (response.body() != null) {
-                        val currentAdapter = (response.body() as ResponseResult)
-                        val messageCode = currentAdapter.message_code.toInt()
-                        catchExceptionShowDialog(messageCode, myCallback)
-                    } else {
-                        catchExceptionShowDialog(R.integer.error_can_not_connect) {}
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseResult>, t: Throwable) {
-                    toast("On failure ${t.message}")
-                }
-
-            })
     }
 
     private fun showOrders() {
