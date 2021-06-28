@@ -69,5 +69,6 @@
         <item>In transit</item>
         <item>Delivered</item>
     </array>
+    <string name="text_transfer_order_question">Do you want to transfer order?</string>
 
 </resources>

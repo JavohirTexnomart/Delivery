@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface TransferService {
-    @POST("javoxir_ut_texnomart/hs/deliverymobapp/transferorder")
+    @POST("RoznicaUT/hs/deliverymobapp/transferorder")
     fun getResponse(@Body data: PostDataOrder): Call<ResponseResult>
 }

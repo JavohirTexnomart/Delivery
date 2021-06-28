@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RouteSheetService {
-    @GET("javoxir_ut_texnomart/hs/deliverymobapp/getRouteSheets")
+    @GET("RoznicaUT/hs/deliverymobapp/getRouteSheets")
     fun getRouteSheets(
         @Query("code_client") code_client: String?, @Query("code_car") code_car: String?
     ): Call<RouteSheetsResponse>

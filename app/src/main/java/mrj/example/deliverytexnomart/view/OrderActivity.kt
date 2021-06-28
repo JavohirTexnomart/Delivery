@@ -91,13 +91,23 @@ class OrderActivity : BaseActivity(
                     showDialogRefuseOrder()
                 }
                 btnTransferOrder.setOnClickListener {
-                    transferOrder()
+                    showDialogToTransferOrder()
                 }
             }
             rvGoods.layoutManager = LinearLayoutManager(this@OrderActivity)
             rvGoods.adapter = GoodAdapter(goods)
             enableButtons()
         }
+    }
+
+    private fun showDialogToTransferOrder() {
+        AlertDialog.Builder(this)
+            .setTitle(resources.getString(R.string.text_transfer_order_question))
+            .setPositiveButton(
+                android.R.string.yes
+            ) { _, _ -> transferOrder() }
+            .setNegativeButton(android.R.string.no, null)
+            .create().show()
     }
 
     private fun enableButtons(enable: Boolean = true) {

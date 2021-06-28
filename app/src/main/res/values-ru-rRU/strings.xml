@@ -71,4 +71,5 @@
     <string name="text_confirm_order_response">Смс сообщение подтверждено</string>
     <string name="text_transfer_order_response">Заказ перенесено успешно</string>
     <string name="text_refuse_order_response">Заказ отменен</string>
+    <string name="text_transfer_order_question">Хотите перенести заказ?</string>
 </resources>

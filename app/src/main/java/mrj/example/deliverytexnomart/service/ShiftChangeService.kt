@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ShiftChangeService {
-    @POST("javoxir_ut_texnomart/hs/deliverymobapp/changeshiftstatus")
+    @POST("RoznicaUT/hs/deliverymobapp/changeshiftstatus")
     fun getResponse(@Body data: PostDataShiftChange): Call<ResponseResult>
 }

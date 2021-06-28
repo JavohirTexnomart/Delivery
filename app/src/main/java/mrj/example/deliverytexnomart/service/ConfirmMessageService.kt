@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ConfirmMessageService {
-    @POST("javoxir_ut_texnomart/hs/deliverymobapp/confirmletter")
+    @POST("RoznicaUT/hs/deliverymobapp/confirmletter")
     fun getResponse(
         @Body data: PostDataConfirmOrder
     ): Call<ConfirmMessage>

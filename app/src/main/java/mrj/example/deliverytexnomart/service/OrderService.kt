@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface OrderService {
-    @GET("javoxir_ut_texnomart/hs/deliverymobapp/orderdetails")
+    @GET("RoznicaUT/hs/deliverymobapp/orderdetails")
     fun getGoods(
         @Query("date") date: String?, @Query("number") number: String?
     ): Call<GoodsResponse>

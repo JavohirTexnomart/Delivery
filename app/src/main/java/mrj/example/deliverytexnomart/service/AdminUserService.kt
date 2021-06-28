@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface AdminUserService {
-    @GET("javoxir_ut_texnomart/hs/deliverymobapp/getcars")
+    @GET("RoznicaUT/hs/deliverymobapp/getcars")
     fun getCars(
         @Query("login") login: String?, @Query("password") password: String?
     ): Call<AdminUserResponse>
