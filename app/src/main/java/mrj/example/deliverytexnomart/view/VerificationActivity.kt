@@ -27,6 +27,7 @@ class VerificationActivity : BaseActivity(homeDislpayEnabled = true) {
         binding = VerificationActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setActionBar(binding.includeToolbar.myToolbar)
+        setSelectedCar(binding.carAbout.txtCar)
         if (intent.extras != null) {
             order = intent.getParcelableExtra(C.ORDER_KEY_FOR_CONFIRM)!!
         }

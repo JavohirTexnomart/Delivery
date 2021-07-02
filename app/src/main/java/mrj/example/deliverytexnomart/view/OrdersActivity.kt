@@ -49,6 +49,7 @@ class OrdersActivity : BaseActivity(menuResId = R.menu.orders_menu, homeDislpayE
         super.onCreate(savedInstanceState)
         binding = OrdersActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSelectedCar(binding.carAbout.txtCar)
 
         filterList = mutableListOf()
         filterList.add(resources.getString(R.string.text_filter_ascending))

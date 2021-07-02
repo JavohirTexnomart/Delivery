@@ -66,6 +66,7 @@ class OrderActivity : BaseActivity(
                 }
             })
         setActionBar(binding.includeToolbar.myToolbar)
+        setSelectedCar(binding.carAbout.txtCar)
     }
 
     private fun bind() {

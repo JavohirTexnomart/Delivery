@@ -33,6 +33,7 @@ class ShiftActivity : BaseActivity() {
             openOrderList()
         }
         setActionBar(binding.includeToolbar.myToolbar)
+        setSelectedCar(binding.carAbout.txtCar)
     }
 
     private fun clickListenerToOpenShift() {

@@ -8,6 +8,10 @@
         android:id="@+id/include_toolbar"
         layout="@layout/toolbar" />
 
+    <include
+        android:id="@+id/car_about"
+        layout="@layout/car_about" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

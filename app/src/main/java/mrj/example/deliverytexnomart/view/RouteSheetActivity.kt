@@ -28,6 +28,7 @@ class RouteSheetActivity : BaseActivity(menuResId = R.menu.route_sheet_menu) {
         super.onCreate(savedInstanceState)
         binding = RoutesheetActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSelectedCar(binding.carAbout.txtCar)
 
         routeSheetList = mutableListOf()
         routeSheetList.clear()

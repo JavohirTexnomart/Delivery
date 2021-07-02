@@ -16,6 +16,7 @@ class ResponseActivity : BaseActivity(homeDislpayEnabled = true) {
         binding = ConfirmRefuseResponseLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setActionBar(binding.includeToolbar.myToolbar)
+        setSelectedCar(binding.carAbout.txtCar)
 
         if (intent != null) {
             val currentItem = (intent.extras?.get(C.keyResponseOrder)) as OrderOperation

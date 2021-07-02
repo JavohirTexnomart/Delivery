@@ -137,4 +137,8 @@ open class BaseActivity(
                 title = resources.getString(titleId, curOrder.number)
         }
     }
+
+    fun setSelectedCar(textView: TextView) {
+        textView.text = C.getNameSelectedCar(this)
+    }
 }
